@@ -1,0 +1,70 @@
+.form {
+	display: grid;
+	margin-bottom: 2rem;
+}
+
+.label {
+	font-size: 2.2rem;
+	margin-bottom: 0.2rem;
+}
+
+.queryInput {
+	font-size: 1.6rem;
+	padding: 0.5rem 2rem;
+	line-height: 2.5rem;
+	border-radius: 20px;
+	border: 1px solid #ddd;
+	margin-bottom: 1rem;
+}
+
+.queryInput:focus{
+	outline: none;
+}
+
+.searchBtn,
+.backBtn {
+	background-color: rgba(0, 0, 0, 0.75);
+	color: #fff;
+	padding: 1rem 2rem;
+	border: 1px solid rgba(0, 0, 0, 0.75);
+	border-radius: 20px;
+	font-size: 1.4rem;
+	cursor: pointer;
+	transition: background-color 250ms;
+}
+
+.searchBtn:hover {
+	background-color: rgba(0, 0, 0, 0.85);
+}
+
+.bookList {
+	margin-top: 2rem;
+}
+
+@media (min-width: 786px) {
+	.form {
+		grid-template-columns: auto 1fr auto;
+		gap: 1rem;
+		align-items: center;
+	}
+
+	.cardContent {
+		grid-template-columns: auto auto;
+		gap: 1rem;
+		align-items: center;
+	}
+
+	.isbnArea {
+		grid-template-columns: auto 1fr auto;
+		gap: 1rem;
+		align-items: center;
+	}
+
+	.isbn {
+		margin-bottom: 0;
+	}
+
+	.queryInput {
+		margin-bottom: 0;
+	}
+}

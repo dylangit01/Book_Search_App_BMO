@@ -1,0 +1,54 @@
+.card {
+	padding: 2rem 4rem;
+	border-radius: 10px;
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.75);
+	margin-bottom: 2rem;
+	background-color: #fff;
+}
+
+.isbnLabel {
+	font-size: 2.2rem;
+}
+
+.isbn {
+	width: 100%;
+	height: 30px;
+	margin-bottom: 2rem;
+}
+.isbn:focus {
+	outline: none;
+}
+
+.cardContent {
+	display: grid;
+}
+
+.cardAuthor {
+	font-size: 2rem;
+}
+
+.cardTitle {
+	margin-bottom: 0.5rem;
+	font-size: 2.2rem;
+}
+
+@media (min-width: 786px) {
+	.cardContent {
+		grid-template-columns: auto auto;
+		gap: 1rem;
+		align-items: center;
+	}
+
+	.isbnArea {
+		grid-template-columns: auto 1fr auto;
+		gap: 1rem;
+		align-items: center;
+	}
+
+	.isbn {
+		margin-bottom: 0;
+	}
+	.queryInput {
+		margin-bottom: 0;
+	}
+}
