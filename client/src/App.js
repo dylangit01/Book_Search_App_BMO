@@ -1,5 +1,4 @@
 import React from 'react';
-import './App.css';
 import SearchBook from './components/SearchBook/SearchBook';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import BookDetail from './components/BookDetail/BookDetail';

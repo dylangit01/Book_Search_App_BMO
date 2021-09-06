@@ -6,6 +6,8 @@
 .label {
 	font-size: 2.2rem;
 	margin-bottom: 0.2rem;
+	color: rgb(244, 244, 244);
+	width: 150px;
 }
 
 .queryInput {
@@ -15,6 +17,7 @@
 	border-radius: 20px;
 	border: 1px solid #ddd;
 	margin-bottom: 1rem;
+	width: 100%;
 }
 
 .queryInput:focus {
@@ -22,7 +25,7 @@
 }
 
 .searchBtn {
-	background-color: rgba(0, 0, 0, 0.75);
+	background-color: rgba(148, 148, 148, 0.5);
 	color: #fff;
 	padding: 1rem 2rem;
 	border: 1px solid rgba(0, 0, 0, 0.75);
@@ -35,11 +38,12 @@
 .searchBtn:hover,
 .titleSortBtn:hover,
 .yearSortBtn:hover {
-	background-color: rgba(0, 0, 0, 0.85);
+	background-color: rgba(58, 58, 58, 0.507);
 }
 
 .search {
 	font-size: 3rem;
+	color: #fff;
 }
 
 .bookList {
@@ -52,15 +56,21 @@
 
 .titleSortBtn,
 .yearSortBtn {
-	background-color: rgba(0, 0, 0, 0.75);
+	background-color: rgba(148, 148, 148, 0.8);
 	color: #fff;
 	padding: 1rem 2rem;
-	border: 1px solid rgba(0, 0, 0, 0.75);
+	border: 1px solid rgba(148, 148, 148, 0.8);
 	border-radius: 5px;
-	font-size: 1.4rem;
+	font-size: 1.8rem;
 	cursor: pointer;
 	transition: background-color 250ms;
 	margin-top: 2rem;
+}
+
+.errorMsg {
+	font-size: 3.5rem;
+	text-align: center;
+	color: #fff;
 }
 
 @media (min-width: 786px) {
@@ -74,6 +84,12 @@
 		grid-template-columns: auto auto;
 		gap: 8rem;
 		align-items: center;
+		justify-content: space-between;
+	}
+
+	.titleSortBtn,
+	.yearSortBtn {
+		width: 400px;
 	}
 
 	.cardContent {

@@ -168,7 +168,7 @@ const SearchBook = () => {
 					) : (
 						<BookDetail error={error} />
 					)}
-					{error && books.length === 0 && <h1>{error}</h1>}
+					{error && books.length === 0 && <h1 className={styles.errorMsg}>{error}</h1>}
 				</>
 			)}
 		</>

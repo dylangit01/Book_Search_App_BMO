@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styles from './BookDetail.module.css';
 
 const BookDetail = ({ error }) => {
+	console.log(error);
 	const [isbnTitle, setIsbnTitle] = useState('');
 	const [authors, setAuthors] = useState([]);
 	const [releaseDate, setReleaseDate] = useState(null);
