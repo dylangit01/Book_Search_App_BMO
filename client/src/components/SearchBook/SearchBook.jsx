@@ -136,7 +136,8 @@ const SearchBook = () => {
 			<SearchIsbn isbnQuery={isbnQuery} setIsbnQuery={setIsbnQuery} handleIsbnSearch={handleIsbnSearch} />
 
 			{isLoading ? (
-				<h1 className={styles.search}>Searching...</h1>
+				// <h1 className={styles.search}>Searching...</h1>
+				<div className={styles.spinner} />
 			) : (
 				<>
 					{changeSearch && books.length > 0 ? (
