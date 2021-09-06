@@ -69,7 +69,9 @@ const SearchBook = () => {
 		setError(null);
 		setChangeSearch(false);
 		setIsLoading(true);
-		const res = await fetch('http://localhost:5000/api/book', {
+		// const localServer = 'http://localhost:5000/api/book'
+		const herokuServerURL = 'https://book-seach-master.herokuapp.com/';
+		const res = await fetch(herokuServerURL, {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json',
