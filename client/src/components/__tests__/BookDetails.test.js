@@ -1,6 +1,6 @@
 import { render, screen, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import SearchBook from '../SearchBook/SearchBook';
+import BookDetails from '../BookDetails/BookDetails';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -19,11 +19,7 @@ const renderWithRedux = (
 };
 
 it('renders with redux', () => {
-	const { getByTestId } = renderWithRedux(<SearchBook />);
+	const { getByTestId, queryByTestId } = renderWithRedux(<BookDetails />);
 });
 
-it('should render searchBook component', () => {
-	renderWithRedux(<SearchBook />);
-	const searchBookEl = screen.getByTestId('searchBook-1')
-	expect(searchBookEl).toBeInTheDocument();
-});
+
