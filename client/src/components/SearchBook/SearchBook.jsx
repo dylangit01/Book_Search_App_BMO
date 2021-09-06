@@ -120,7 +120,7 @@ const SearchBook = () => {
 					BOOK TITLE:
 				</label>
 				<input
-					data-testid = 'search-input'
+					data-testid='search-input'
 					required
 					className={styles.queryInput}
 					type='text'
@@ -137,7 +137,7 @@ const SearchBook = () => {
 			<SearchIsbn isbnQuery={isbnQuery} setIsbnQuery={setIsbnQuery} handleIsbnSearch={handleIsbnSearch} />
 
 			{isLoading ? (
-				<div className={styles.spinner} />
+				<div data-testid='search-loading' className={styles.spinner} />
 			) : (
 				<>
 					{changeSearch && books.length > 0 ? (
@@ -155,7 +155,7 @@ const SearchBook = () => {
 
 							{yearSortedBooks && <SortBook sortedBooks={yearSortedBooks} />}
 							{titleSortedBooks && <SortBook sortedBooks={titleSortedBooks} />}
-							<SortBook sortedBooks={books} />
+							<SortBook data-testid='search-result' sortedBooks={books} />
 						</>
 					) : (
 						<BookDetails error={error} />

@@ -26,7 +26,7 @@ const BookDetails = ({ error }) => {
 	return (
 		<>
 			{!error && Object.keys(bookDetails).length > 0 && (
-				<div className={styles.card}>
+				<div data-testid='book-details' className={styles.card}>
 					<h1>Book Details:</h1>
 					<div className={styles.cardContent}>
 						<h3 className={styles.cardTitle}>Title: {isbnTitle}</h3>

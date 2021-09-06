@@ -19,9 +19,15 @@ const renderWithRedux = (
 };
 
 describe('BookDetails component', () => {
-
-	it('renders with redux', () => {
-		const { getByTestId, queryByTestId } = renderWithRedux(<BookDetails />);
+	it('should render with redux', () => {
+		renderWithRedux(<BookDetails />);
 	});
+
+	it('should not render when error happens or no content', () => {
+		renderWithRedux(<BookDetails />);
+		const bookDetails = screen.queryByTestId('book-details');
+		expect(bookDetails).toBeFalsy()
+	})
+
 
 })
