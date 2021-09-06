@@ -44,6 +44,10 @@
 	margin-top: 2rem;
 }
 
+.titleSortBtn {
+	
+}
+
 @media (min-width: 786px) {
 	.form {
 		grid-template-columns: auto 1fr auto;

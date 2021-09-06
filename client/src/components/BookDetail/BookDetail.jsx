@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 import styles from './BookDetail.module.css';
 
-const BookDetail = () => {
+const BookDetail = ({ error }) => {
 	const [isbnTitle, setIsbnTitle] = useState('');
 	const [authors, setAuthors] = useState([]);
 	const [releaseDate, setReleaseDate] = useState(null);
 	const [isbn, setIsbn] = useState('');
 
 	const bookDetails = useSelector((state) => state.bookDetails);
-	console.log(bookDetails);
 
 	useEffect(() => {
 		if (bookDetails) {
@@ -23,7 +21,7 @@ const BookDetail = () => {
 
 	return (
 		<>
-			{Object.keys(bookDetails).length > 0 && (
+			{!error && Object.keys(bookDetails).length > 0 && (
 				<div className={styles.card}>
 					<div className={styles.cardContent}>
 						<h3 className={styles.cardTitle}>Title: {isbnTitle}</h3>

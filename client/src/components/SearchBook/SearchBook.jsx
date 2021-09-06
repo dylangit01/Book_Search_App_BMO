@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './SearchBook.module.css';
 import Book from '../Book/Book';
 import IsbnForm from '../IsbnForm/IsbnForm';
@@ -25,7 +25,7 @@ const SearchBook = () => {
 		e.preventDefault();
 		setTitleSortedBooks([]);
 		setYearSortedBooks([]);
-		setBooks([])
+		setBooks([]);
 		setChangeSearch(true);
 		setIsLoading(true);
 		try {
@@ -60,10 +60,9 @@ const SearchBook = () => {
 		}
 	};
 
-	useEffect(() => {}, []);
-
 	const handleIsbnSearch = async (e) => {
 		e.preventDefault();
+		setError(null)
 		setChangeSearch(false);
 		setIsLoading(true);
 		const res = await fetch('http://localhost:5000/api/book', {
@@ -77,7 +76,7 @@ const SearchBook = () => {
 
 		if (records === undefined) {
 			const err = new Error();
-			err.message = 'Sorry, Internal Server Error! Please try it later...';
+			err.message = 'No result, please try again';
 			setError(err.message);
 			setIsLoading(false);
 			setIsbnQuery('');
@@ -90,7 +89,7 @@ const SearchBook = () => {
 	};
 
 	const sortByTitle = () => {
-		setYearSortedBooks([])
+		setYearSortedBooks([]);
 		setTitleSortedBooks(
 			books.sort((a, b) => {
 				if (a.title.toLowerCase() < b.title.toLowerCase()) {
@@ -142,18 +141,20 @@ const SearchBook = () => {
 				<>
 					{changeSearch && books.length > 0 ? (
 						<>
-							{books.length > 0 && <button onClick={sortByTitle}>Sort by Title</button>}
-							{books.length > 0 && <button onClick={sortByYear}>Sort by Published Year</button>}
+							{books.length > 0 && (
+								<button className={styles.titleSortBtn} onClick={sortByTitle}>
+									Sort by Title
+								</button>
+							)}
+							{books.length > 0 && (
+								<button className={styles.yearSortBtn} onClick={sortByYear}>
+									Sort by Published Year
+								</button>
+							)}
 
-							{yearSortedBooks ? (
+							{yearSortedBooks && (
 								<div className={styles.bookList}>
 									{yearSortedBooks.map((book) => (
-										<Book key={book.key} book={book} />
-									))}
-								</div>
-							) : (
-								<div className={styles.bookList}>
-									{books.map((book) => (
 										<Book key={book.key} book={book} />
 									))}
 								</div>
@@ -165,7 +166,7 @@ const SearchBook = () => {
 							</div>
 						</>
 					) : (
-						<BookDetail />
+						<BookDetail error={error} />
 					)}
 					{error && books.length === 0 && <h1>{error}</h1>}
 				</>
