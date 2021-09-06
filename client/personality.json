@@ -1,25 +1,44 @@
-{
-	"legalName": "Changren Du",
-	"nickName":"Dylan",
-	"title": "Front End Web Developer",
-	"loveCoding":true,
-	"summary": "Full Stack Web Developer with successful experience working on multiple projects. Enthusiastic to contribute to team success through hard work, attention to detail and excellent organizational skills. Motivated to learn, grow and excel in the web-development industry.",
-	"skills": {
-		"frontEnd":["JavaScript", "HTML5", "CSS3", "React",  "Redux", "Hooks", "Axios", "Material-UI", "shopify", "WordPress"],
-		"backEnd": [
-			"NodeJS", "Express", "Golang", "RESTful API"
+	{
+	 "legalName": "Changren Du",
+	 "nickName":"Dylan",
+	 "title": "Front End Web Developer",
+	 "loveCoding":true,
+	 "skills": {
+	 "frontEnd":
+		 [
+		 "JavaScript", "HTML5", "CSS3", "React",  "Redux",
+		 "Hooks", "Axios", "Material-UI", "shopify",
+		 "WordPress"
+		 ],
+	 "backEnd": 
+		 [
+		 "NodeJS", "Express", "Golang", "RESTful API"
+		 ],
+	 "dataBase":
+		 [
+		 "PostgreSQL", "SQL", "MongoDB"
+		 ],
+	 "versionControl":["Github"],
+	 "learning":
+		 [
+		 "Typescript", "GraphQL", "Jest & Enzyme"
+		 ]
+	 },
+	 "portfolio":{
+	  "portfolio":"https://dylan-du-portfolio.netlify.app",
+	  "projects":[
+		 "https://booksearchmaster.netlify.app", 
+		 "https://shopify-eshop.netlify.app", 
+		 "https://instanttrip-complete-version.netlify.app",
+		 "https://dylan-e-store.netlify.app", 
+		 "https://online-music-game.netlify.app"
+		 ],
+	 "linkedIn":"https://www.linkedin.com/in/dylan-du/"
+		},
+	 "personality":
+		[
+		 "good work ethics", "hard work", "easy going",
+		 "never give up"
 		],
-		"dataBase":["PostgreSQL", "SQL", "MongoDB"],
-		"versionControl":["Github"],
-		"learning":[
-			"Typescript", "GraphQL", "Jest & Enzyme"
-		]
-	},
-	"portfolio":{
-		"portfolio":"https://dylan-du-portfolio.netlify.app",
-		"projects":["https://booksearchmaster.netlify.app", "https://shopify-eshop.netlify.app", "https://instanttrip-complete-version.netlify.app", "https://dylan-e-store.netlify.app", "https://online-music-game.netlify.app"],
-		"linkedIn":"https://www.linkedin.com/in/dylan-du/"
-	},
-	"personality":["good work ethics", "hard work", "easy going", "never give up"],
-	"hobby":["play video game", "traveling", "tennis"]
+	 "hobby":["play video game", "traveling", "tennis"]
 }
