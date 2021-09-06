@@ -12,10 +12,10 @@
 * I have spent 2 and half days on this coding assignment.
 	* a.	What would you add to your solution if you had more time?
 
-		- Add a "Search by Author" filter option.
-		- Add pagination for the search results.
-		- Add more tests since I am learning react testing recently.
-		- Refactor some other actions to redux.
+		- [ ] Add a "Search by Author" filter option
+		- [ ] Build pagination for the search results
+		- [ ] Add more tests for app
+		- [ ] Refactor some other actions using redux
 
 	* b.	If you didn't spend much time on the coding test, then use this as an opportunity to explain what you would add.
 2.	What was the most useful feature that was added to the latest version of your chosen language? Please include a snippet of code that shows how you've used it.	
