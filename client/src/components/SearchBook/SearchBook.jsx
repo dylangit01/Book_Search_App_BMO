@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import styles from './SearchBook.module.css';
-import Book from '../Book/Book';
 import SearchIsbn from '../SearchIsbn/SearchIsbn';
 
 import { useDispatch } from 'react-redux';
 import { getBookDetails } from '../../redux/actions/bookAction';
-import BookDetail from '../BookDetail/BookDetail';
+import BookDetails from '../BookDetails/BookDetails';
+import SortBook from '../SortBooks/SortBooks';
 
 const URL = 'http://openlibrary.org/search.json?q=';
 
@@ -152,21 +152,12 @@ const SearchBook = () => {
 								</div>
 							)}
 
-							{yearSortedBooks && (
-								<div className={styles.bookList}>
-									{yearSortedBooks.map((book) => (
-										<Book key={book.key} book={book} />
-									))}
-								</div>
-							)}
-							<div className={styles.bookList}>
-								{books.map((book) => (
-									<Book key={book.key} book={book} />
-								))}
-							</div>
+							{yearSortedBooks && <SortBook sortedBooks={yearSortedBooks} />}
+							{titleSortedBooks && <SortBook sortedBooks={titleSortedBooks} />}
+							<SortBook sortedBooks={books} />
 						</>
 					) : (
-						<BookDetail error={error} />
+						<BookDetails error={error} />
 					)}
 					{error && books.length === 0 && <h1 className={styles.errorMsg}>{error}</h1>}
 				</>

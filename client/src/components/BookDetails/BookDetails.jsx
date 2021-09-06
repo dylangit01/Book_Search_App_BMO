@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import styles from './BookDetail.module.css';
+import styles from './BookDetails.module.css';
 
-const BookDetail = ({ error }) => {
-	console.log(error);
+const BookDetails = ({ error }) => {
 	const [isbnTitle, setIsbnTitle] = useState('');
 	const [authors, setAuthors] = useState([]);
 	const [releaseDate, setReleaseDate] = useState(null);
@@ -35,8 +34,7 @@ const BookDetail = ({ error }) => {
 										<ul>
 											<li>{author.name}</li>
 										</ul>
-										<a target='_blank' rel='noreferrer' href={author.url}>
-											{author.url}
+										<a className={styles.authorURL} target='_blank' rel='noreferrer' href={author.url}>{author.url}
 										</a>
 									</div>
 								))}
@@ -49,4 +47,4 @@ const BookDetail = ({ error }) => {
 	);
 };
 
-export default BookDetail;
+export default BookDetails;

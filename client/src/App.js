@@ -1,7 +1,6 @@
 import React from 'react';
 import SearchBook from './components/SearchBook/SearchBook';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import BookDetail from './components/BookDetail/BookDetail';
 
 function App() {
 	return (
@@ -11,9 +10,6 @@ function App() {
 				<Switch>
 					<Route exact path='/'>
 						<SearchBook />
-					</Route>
-					<Route exact path='/book/isbn/:id'>
-						<BookDetail />
 					</Route>
 				</Switch>
 			</div>
