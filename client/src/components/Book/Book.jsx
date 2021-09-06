@@ -32,13 +32,13 @@ const Book = ({ book }) => {
 						<img
 							className={styles.bookImg}
 							src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
-							alt='img'
+							alt='booKImg'
 						/>
 					) : (
 						<img
 							className={styles.bookImg}
 							src='https://cdn.pixabay.com/photo/2018/01/03/09/09/book-3057901_640.png'
-							alt='imgAlt'
+							alt='BookImgAlt'
 						/>
 					)}
 				</div>

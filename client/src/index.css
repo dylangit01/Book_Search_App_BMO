@@ -1,14 +1,14 @@
 html {
 	font-size: 10px;
-	background: url('./images/library_wallpaper.jpeg') no-repeat center center fixed; 
+	/* background: url('./images/library_wallpaper.jpeg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-	height: auto;
+	height: auto; */
 }
 
-html::before {
+/* html::before {
 	content: '';
 	position: fixed;
 	height: auto;
@@ -18,7 +18,7 @@ html::before {
 	bottom: 0;
 	background: rgb(0, 0, 0, 0.6);
   z-index: -1;
-}
+} */
 
 * {
 	box-sizing: border-box;
@@ -27,7 +27,7 @@ html::before {
 body {
 	margin: 0;
 	padding: 0;
-	/* background-color: rgb(244, 244, 244); */
+	background-color: rgb(244, 244, 244);
 	color: #333;
 }
 
@@ -48,7 +48,6 @@ small {
 .title {
 	font-size: 5rem;
 	text-align: center;
-	color:#fff
 }
 
 a,

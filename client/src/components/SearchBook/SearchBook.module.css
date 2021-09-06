@@ -6,7 +6,6 @@
 .label {
 	font-size: 2.2rem;
 	margin-bottom: 0.2rem;
-	color: rgb(244, 244, 244);
 	width: 150px;
 }
 
@@ -25,7 +24,7 @@
 }
 
 .searchBtn {
-	background-color: rgba(148, 148, 148, 0.5);
+	background-color: rgba(0, 0, 0, 0.75);
 	color: #fff;
 	padding: 1rem 2rem;
 	border: 1px solid rgba(0, 0, 0, 0.75);
@@ -38,12 +37,11 @@
 .searchBtn:hover,
 .titleSortBtn:hover,
 .yearSortBtn:hover {
-	background-color: rgba(58, 58, 58, 0.507);
+	background-color: rgba(0, 0, 0, 0.85);
 }
 
 .search {
 	font-size: 3rem;
-	color: #fff;
 }
 
 .bookList {
@@ -56,10 +54,10 @@
 
 .titleSortBtn,
 .yearSortBtn {
-	background-color: rgba(148, 148, 148, 0.8);
+	background-color: rgba(0, 0, 0, 0.75);
 	color: #fff;
 	padding: 1rem 2rem;
-	border: 1px solid rgba(148, 148, 148, 0.8);
+	border: 1px solid rgba(0, 0, 0, 0.75);
 	border-radius: 5px;
 	font-size: 1.8rem;
 	cursor: pointer;
@@ -70,14 +68,13 @@
 .errorMsg {
 	font-size: 3.5rem;
 	text-align: center;
-	color: #fff;
 }
 
 .spinner {
     width: 80px;
     height: 80px;
 
-    border: 5px solid #f3f3f3;
+    border: 5px solid #333;
     border-top: 5px solid #f25a41;
     border-radius: 100%;
 
