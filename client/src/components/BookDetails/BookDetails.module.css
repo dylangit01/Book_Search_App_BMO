@@ -12,10 +12,11 @@
 }
 
 .cardAuthor {
-	font-size: 2rem;
+	font-size: 2.2rem;
+	line-height: 1;
 }
 
-.cardTitle {
+.cardTitle, .releaseDate {
 	margin-bottom: 0.5rem;
 	font-size: 2.2rem;
 }
@@ -23,15 +24,17 @@
 a {
 	display:inline-block;
   word-wrap: break-word;
-	width: 220px;
+	font-size: 2.2rem;
+	/* text-decoration: none; */
+	font-weight: bold;
 }
 
 @media (min-width: 786px) {
 	.cardContent {
-		grid-template-columns: auto auto;
+		grid-template-columns: auto auto auto;
 		gap: 1rem;
 		align-items: center;
 		justify-content: space-between;
-		margin: 0 3rem;
+		margin: 0 2rem;
 	}
 }

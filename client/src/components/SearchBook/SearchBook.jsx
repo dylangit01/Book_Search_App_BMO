@@ -40,7 +40,7 @@ const SearchBook = () => {
 				return;
 			}
 			const data = await res.json();
-			console.log(data);
+			
 			if (data.docs.length === 0) {
 				const err = new Error();
 				err.message = 'No result, please try again';

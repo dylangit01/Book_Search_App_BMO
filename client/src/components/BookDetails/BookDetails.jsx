@@ -7,6 +7,8 @@ const BookDetails = ({ error }) => {
 	const [authors, setAuthors] = useState([]);
 	const [releaseDate, setReleaseDate] = useState(null);
 	const [isbn, setIsbn] = useState('');
+	const [pageNums, setPageNums] = useState(0);
+	const [bookInfo, setBookInfo] = useState('');
 
 	const bookDetails = useSelector((state) => state.bookDetails);
 
@@ -16,6 +18,8 @@ const BookDetails = ({ error }) => {
 			setAuthors(bookDetails.data?.authors);
 			setReleaseDate(bookDetails.publishDates);
 			setIsbn(bookDetails.isbns);
+			setPageNums(bookDetails.details?.details?.number_of_pages);
+			setBookInfo(bookDetails.details?.info_url);
 		}
 	}, [bookDetails]);
 
@@ -23,10 +27,12 @@ const BookDetails = ({ error }) => {
 		<>
 			{!error && Object.keys(bookDetails).length > 0 && (
 				<div className={styles.card}>
+					<h1>Book Details:</h1>
 					<div className={styles.cardContent}>
 						<h3 className={styles.cardTitle}>Title: {isbnTitle}</h3>
 						<h3 className={styles.cardTitle}>ISBN: {isbn && isbn[0]}</h3>
-						<h2 className={styles.cardAuthor}>
+						<h3 className={styles.releaseDate}>Publish Date: {releaseDate}</h3>
+						<h3 className={styles.cardAuthor}>
 							Author:
 							{authors &&
 								authors.map((author, i) => (
@@ -34,12 +40,13 @@ const BookDetails = ({ error }) => {
 										<ul>
 											<li>{author.name}</li>
 										</ul>
-										<a className={styles.authorURL} target='_blank' rel='noreferrer' href={author.url}>{author.url}
-										</a>
 									</div>
 								))}
-						</h2>
-						<h2 className={styles.cardAuthor}>Publish Date: {releaseDate}</h2>
+						</h3>
+						<h3 className={styles.cardAuthor}>Number of Pages: {pageNums}</h3>
+						<a target='_blank' rel='noreferrer' href={bookInfo}>
+							Book Info Link
+						</a>
 					</div>
 				</div>
 			)}
