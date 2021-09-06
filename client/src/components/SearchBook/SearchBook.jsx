@@ -8,7 +8,7 @@ import { getBookDetails } from '../../redux/actions/bookAction';
 import BookDetails from '../BookDetails/BookDetails';
 import SortBook from '../SortBooks/SortBooks';
 
-const URL = 'http://openlibrary.org/search.json?q=';
+const URL = 'https://openlibrary.org/search.json?q=';
 
 const SearchBook = () => {
 	const [books, setBooks] = useState([]);
