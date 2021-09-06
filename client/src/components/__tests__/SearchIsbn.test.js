@@ -5,31 +5,21 @@ import SearchIsbn from '../SearchIsbn/SearchIsbn'
 afterEach(cleanup);
 
 describe('SearchIsbn component', () => {
-	it('should render with redux', () => {
+	it('should render SearchIsbn component', () => {
 		render(<SearchIsbn />);
+		const isbnForm = screen.getByTestId('isbn-form');
+		expect(isbnForm).toBeInTheDocument();
 	});
 
-	// it('should render searchBook component', () => {
-	// 	render(<SearchIsbn />);
-	// 	const searchBookEl = screen.getByTestId('searchBook');
-	// 	expect(searchBookEl).toBeInTheDocument();
-	// });
+	it('should display book search label', () => {
+		render(<SearchIsbn />);
+		const searchBookEl = screen.getByTestId('isbn-search-label');
+		expect(searchBookEl).toHaveTextContent('BOOK ISBN');
+	});
 
-	// it('should display book search label', () => {
-	// 	render(<SearchIsbn />);
-	// 	const searchBookEl = screen.getByTestId('search-label');
-	// 	expect(searchBookEl).toHaveTextContent('BOOK TITLE');
-	// });
-
-	// it('should render input', () => {
-	// 	render(<SearchIsbn />);
-	// 	const inputEl = screen.getByTestId('search-input');
-	// 	expect(inputEl).toBeTruthy();
-	// });
-
-	// it('should not render loading state initially', () => {
-	// 	render(<SearchIsbn />);
-	// 	const loadingEl = screen.queryByTestId('search-loading');
-	// 	expect(loadingEl).toBeFalsy();
-	// });
+	it('should render input', () => {
+		render(<SearchIsbn />);
+		const inputEl = screen.getByTestId('isbn-search-input');
+		expect(inputEl).toBeTruthy();
+	});
 });

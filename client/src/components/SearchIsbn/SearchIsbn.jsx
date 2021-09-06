@@ -4,11 +4,12 @@ import styles from './SearchIsbn.module.css';
 
 const IsbnForm = ({ isbnQuery, setIsbnQuery, handleIsbnSearch }) => {
 	return (
-		<form className={styles.isbnArea} onSubmit={handleIsbnSearch}>
-			<label htmlFor='isbnQuery' className={styles.isbnLabel}>
+		<form data-testid='isbn-form' className={styles.isbnArea} onSubmit={handleIsbnSearch}>
+			<label data-testid='isbn-search-label' htmlFor='isbnQuery' className={styles.isbnLabel}>
 				BOOK ISBN:
 			</label>
 			<input
+				data-testid='isbn-search-input'
 				required
 				className={styles.queryInput}
 				type='text'
