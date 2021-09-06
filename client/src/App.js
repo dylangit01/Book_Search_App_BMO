@@ -6,7 +6,7 @@ function App() {
 	return (
 		<div className='container'>
 			<h1 onClick={() => window.location.reload()} className='title'>
-				Online Book Search Master
+				Book Search Master
 				<img className='reload' src={reload} alt='reload' />
 			</h1>
 			<SearchBook />

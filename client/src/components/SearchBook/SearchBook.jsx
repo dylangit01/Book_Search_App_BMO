@@ -115,11 +115,12 @@ const SearchBook = () => {
 
 	return (
 		<>
-			<form data-testid='searchBook-1' className={styles.form} onSubmit={fetchBooks}>
-				<label htmlFor='query' className={styles.label}>
+			<form data-testid='searchBook' className={styles.form} onSubmit={fetchBooks}>
+				<label data-testid='search-label' htmlFor='query' className={styles.label}>
 					BOOK TITLE:
 				</label>
 				<input
+					data-testid = 'search-input'
 					required
 					className={styles.queryInput}
 					type='text'
@@ -128,7 +129,7 @@ const SearchBook = () => {
 					value={query}
 					onChange={(e) => setQuery(e.target.value)}
 				/>
-				<button className={styles.searchBtn} type='submit'>
+				<button data-testid='title-button' className={styles.searchBtn} type='submit'>
 					Search
 				</button>
 			</form>

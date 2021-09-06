@@ -18,12 +18,20 @@ const renderWithRedux = (
 	};
 };
 
-it('renders with redux', () => {
-	const { getByTestId } = renderWithRedux(<SearchBook />);
-});
+describe('SearchBook component', () => {
+	it('renders with redux', () => {
+		const { getByTestId } = renderWithRedux(<SearchBook />);
+	});
 
-it('should render searchBook component', () => {
-	renderWithRedux(<SearchBook />);
-	const searchBookEl = screen.getByTestId('searchBook-1')
-	expect(searchBookEl).toBeInTheDocument();
+	it('should render searchBook component', () => {
+		renderWithRedux(<SearchBook />);
+		const searchBookEl = screen.getByTestId('searchBook');
+		expect(searchBookEl).toBeInTheDocument();
+	});
+
+	it('should display book search label', () => {
+		renderWithRedux(<SearchBook />);
+		const searchBookEl = screen.getByTestId('search-label');
+		expect(searchBookEl).toHaveTextContent('BOOK TITLE');
+	});
 });

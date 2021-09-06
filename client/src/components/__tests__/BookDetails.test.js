@@ -18,8 +18,10 @@ const renderWithRedux = (
 	};
 };
 
-it('renders with redux', () => {
-	const { getByTestId, queryByTestId } = renderWithRedux(<BookDetails />);
-});
+describe('BookDetails component', () => {
 
+	it('renders with redux', () => {
+		const { getByTestId, queryByTestId } = renderWithRedux(<BookDetails />);
+	});
 
+})
