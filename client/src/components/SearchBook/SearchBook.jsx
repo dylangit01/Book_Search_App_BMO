@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SearchBook.module.css';
 import Book from '../Book/Book';
-import IsbnForm from '../IsbnForm/IsbnForm';
+import SearchIsbn from '../SearchIsbn/SearchIsbn';
 
 import { useDispatch } from 'react-redux';
 import { getBookDetails } from '../../redux/actions/bookAction';
@@ -133,7 +133,7 @@ const SearchBook = () => {
 				</button>
 			</form>
 
-			<IsbnForm isbnQuery={isbnQuery} setIsbnQuery={setIsbnQuery} handleIsbnSearch={handleIsbnSearch} />
+			<SearchIsbn isbnQuery={isbnQuery} setIsbnQuery={setIsbnQuery} handleIsbnSearch={handleIsbnSearch} />
 
 			{isLoading ? (
 				<h1 className={styles.search}>Searching...</h1>

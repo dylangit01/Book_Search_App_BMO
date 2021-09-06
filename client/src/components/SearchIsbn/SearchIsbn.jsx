@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './IsbnForm.module.css';
+import styles from './SearchIsbn.module.css';
 
 
 const IsbnForm = ({ isbnQuery, setIsbnQuery, handleIsbnSearch }) => {
