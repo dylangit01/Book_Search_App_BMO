@@ -1,14 +1,14 @@
 html {
 	font-size: 10px;
-	/* background: url('./images/library_wallpaper.jpeg') no-repeat center center fixed; 
+	background: url('./images/library_wallpaper.jpeg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-	height: auto; */
+	height: auto;
 }
 
-/* html::before {
+html::before {
 	content: '';
 	position: fixed;
 	height: auto;
@@ -18,7 +18,7 @@ html {
 	bottom: 0;
 	background: rgb(0, 0, 0, 0.6);
   z-index: -1;
-} */
+}
 
 * {
 	box-sizing: border-box;

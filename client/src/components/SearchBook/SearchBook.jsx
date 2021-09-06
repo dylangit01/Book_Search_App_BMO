@@ -144,10 +144,10 @@ const SearchBook = () => {
 							{books.length > 0 && (
 								<div className={styles.sortBtns}>
 									<button className={styles.titleSortBtn} onClick={sortByTitle}>
-										Sort by Title
+										Sort by Title (alphabetically )
 									</button>
 									<button className={styles.yearSortBtn} onClick={sortByYear}>
-										Sort by Published Year
+										Sort by most recently Published Year
 									</button>
 								</div>
 							)}

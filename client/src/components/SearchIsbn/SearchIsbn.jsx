@@ -17,9 +17,7 @@ const IsbnForm = ({ isbnQuery, setIsbnQuery, handleIsbnSearch }) => {
 				value={isbnQuery}
 				onChange={(e) => setIsbnQuery(e.target.value)}
 			/>
-			{/* <Link to={`/book/isbn/${isbnQuery}`}> */}
 			<button className={styles.isbnBtn}>Search</button>
-			{/* </Link> */}
 		</form>
 	);
 };
