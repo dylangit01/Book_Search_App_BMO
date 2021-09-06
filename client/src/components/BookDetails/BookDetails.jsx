@@ -10,8 +10,10 @@ const BookDetails = ({ error }) => {
 	const [pageNums, setPageNums] = useState(0);
 	const [bookInfo, setBookInfo] = useState('');
 
+	// Using redux selector to get data from backend
 	const bookDetails = useSelector((state) => state.bookDetails);
 
+	// Only when bookDetails has been updated from backend, update matched data
 	useEffect(() => {
 		if (bookDetails) {
 			setIsbnTitle(bookDetails.data?.title);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SearchBook.module.css';
 import SearchIsbn from '../SearchIsbn/SearchIsbn';
+import { sortByTitleFun } from '../Help/helpFuncs';
 
 import { useDispatch } from 'react-redux';
 import { getBookDetails } from '../../redux/actions/bookAction';
@@ -21,6 +22,7 @@ const SearchBook = () => {
 
 	const dispatch = useDispatch();
 
+	// todo: create backend API and redux action for fetchBooks function
 	const fetchBooks = async (e) => {
 		e.preventDefault();
 		setTitleSortedBooks([]);
@@ -60,6 +62,8 @@ const SearchBook = () => {
 		}
 	};
 
+	// Build Backend API for Isbn Search because of CORS error
+	// Create Redux to handle async issue when fetching response from backend 
 	const handleIsbnSearch = async (e) => {
 		e.preventDefault();
 		setError(null);
@@ -90,17 +94,7 @@ const SearchBook = () => {
 
 	const sortByTitle = () => {
 		setYearSortedBooks([]);
-		setTitleSortedBooks(
-			books.sort((a, b) => {
-				if (a.title.toLowerCase() < b.title.toLowerCase()) {
-					return -1;
-				}
-				if (a.title.toLowerCase() > b.title.toLowerCase()) {
-					return 1;
-				}
-				return 0;
-			})
-		);
+		setTitleSortedBooks(sortByTitleFun(books));
 	};
 
 	const sortByYear = () => {

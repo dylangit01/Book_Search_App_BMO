@@ -28,6 +28,4 @@ describe('BookDetails component', () => {
 		const bookDetails = screen.queryByTestId('book-details');
 		expect(bookDetails).toBeFalsy()
 	})
-
-
 })
