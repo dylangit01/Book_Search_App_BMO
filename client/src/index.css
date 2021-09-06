@@ -31,3 +31,7 @@ small {
   font-size: 3.4rem;
   text-align: center;
 }
+
+a, a:visited, a:hover, a:active {
+  color: inherit;
+}

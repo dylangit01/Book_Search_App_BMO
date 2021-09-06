@@ -10,6 +10,7 @@ const IsbnForm = ({ isbnQuery, setIsbnQuery, handleIsbnSearch }) => {
 				BOOK ISBN:
 			</label>
 			<input
+				required
 				className={styles.queryInput}
 				type='text'
 				name='isbnQuery'

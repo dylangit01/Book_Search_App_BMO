@@ -1,10 +1,9 @@
 import { GET_BOOK_DETAILS } from "../actions/bookAction";
 
-const book = (bookDetails = null, action) => {
-	console.log(action.payload);
+const book = (bookDetails = {}, action) => {
 	switch (action.type) {
 		case GET_BOOK_DETAILS:
-			return action.payload
+			return { ...Object.values(action.payload)[0] }
 		default:
 			return bookDetails
 	}

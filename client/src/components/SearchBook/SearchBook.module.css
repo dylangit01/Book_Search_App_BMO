@@ -21,8 +21,7 @@
 	outline: none;
 }
 
-.searchBtn,
-.backBtn {
+.searchBtn {
 	background-color: rgba(0, 0, 0, 0.75);
 	color: #fff;
 	padding: 1rem 2rem;
@@ -35,6 +34,10 @@
 
 .searchBtn:hover {
 	background-color: rgba(0, 0, 0, 0.85);
+}
+
+.search {
+	font-size: 3rem;
 }
 
 .bookList {
@@ -52,16 +55,6 @@
 		grid-template-columns: auto auto;
 		gap: 1rem;
 		align-items: center;
-	}
-
-	.isbnArea {
-		grid-template-columns: auto 1fr auto;
-		gap: 1rem;
-		align-items: center;
-	}
-
-	.isbn {
-		margin-bottom: 0;
 	}
 
 	.queryInput {

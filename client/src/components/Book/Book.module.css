@@ -6,35 +6,44 @@
 	background-color: #fff;
 }
 
-.isbnLabel {
+.pubDateLabel {
 	font-size: 2.2rem;
+	font-weight: bold;
 }
 
-.isbn {
-	width: 100%;
+.publish {
+	width: 50%;
 	height: 30px;
 	margin-bottom: 2rem;
 }
-.isbn:focus {
+.publish:focus {
 	outline: none;
 }
 
 .cardContent {
 	display: grid;
+	position: relative;
 }
 
 .cardAuthor {
-	font-size: 2rem;
+	font-size: 2.2rem;
 }
 
 .cardTitle {
+	margin-top: 0;
 	margin-bottom: 0.5rem;
 	font-size: 2.2rem;
 }
 
+.bookImg {
+	height: 200px;
+	width: auto;
+	
+}
+
 @media (min-width: 786px) {
 	.cardContent {
-		grid-template-columns: auto auto;
+		grid-template-columns: 1fr auto;
 		gap: 1rem;
 		align-items: center;
 	}

@@ -1,39 +1,56 @@
 import React, { useState, useEffect } from 'react';
 import styles from './SearchBook.module.css';
-import Card from '../Card/Card';
+import Book from '../Book/Book';
 import IsbnForm from '../IsbnForm/IsbnForm';
 
 import { useDispatch } from 'react-redux';
 import { getBookDetails } from '../../redux/actions/bookAction';
+import BookDetail from '../BookDetail/BookDetail';
 
 const URL = 'http://openlibrary.org/search.json?q=';
 
 const SearchBook = () => {
 	const [books, setBooks] = useState([]);
+	const [titleSortedBooks, setTitleSortedBooks] = useState([]);
+	const [yearSortedBooks, setYearSortedBooks] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const [query, setQuery] = useState('');
 	const [isbnQuery, setIsbnQuery] = useState('');
-
-	const [title, setTitle] = useState('');
-	const [author, setAuthor] = useState([]);
-	const [bookCover, setBookCover] = useState('');
-	const [releaseDate, setReleaseDate] = useState(null);
-	const [OLID, setOLID] = useState('')
-	const [bookDetails, setBookDetails] = useState({})
+	const [changeSearch, setChangeSearch] = useState(true);
 
 	const dispatch = useDispatch();
 
 	const fetchBooks = async (e) => {
 		e.preventDefault();
-
+		setTitleSortedBooks([]);
+		setYearSortedBooks([]);
+		setBooks([])
+		setChangeSearch(true);
 		setIsLoading(true);
 		try {
 			const res = await fetch(`${URL}${query}`);
+			if (res.status === 500) {
+				const err = new Error();
+				err.message =
+					"Sorry, Internal Server Error! There seems to be a problem with what you were just looking at. We've noted the error 2021-09-05/132912964475 and will look into it as soon as possible.";
+				setError(err.message);
+				setIsLoading(false);
+				setQuery('');
+				return;
+			}
 			const data = await res.json();
+			console.log(data);
+			if (data.docs.length === 0) {
+				const err = new Error();
+				err.message = 'No result, please try again';
+				setError(err.message);
+				setIsLoading(false);
+				setQuery('');
+				return;
+			}
 
 			setBooks(data.docs);
-			console.log(data.docs);
 			setIsLoading(false);
 			setQuery('');
 		} catch (e) {
@@ -43,41 +60,59 @@ const SearchBook = () => {
 		}
 	};
 
+	useEffect(() => {}, []);
+
 	const handleIsbnSearch = async (e) => {
 		e.preventDefault();
-
-		const isbnInput = new FormData(e.target);
-		const payload = Object.fromEntries(isbnInput.entries());
-
+		setChangeSearch(false);
+		setIsLoading(true);
 		const res = await fetch('http://localhost:5000/api/book', {
 			method: 'POST',
 			headers: {
 				'Content-type': 'application/json',
 			},
-			body: JSON.stringify(payload),
+			body: JSON.stringify({ isbnQuery }),
 		});
 		const { records } = await res.json();
+
+		if (records === undefined) {
+			const err = new Error();
+			err.message = 'Sorry, Internal Server Error! Please try it later...';
+			setError(err.message);
+			setIsLoading(false);
+			setIsbnQuery('');
+			return;
+		}
+
 		dispatch(getBookDetails(records));
-		
-		// setBookDetails(Object.values(data.records)[0]);
-		// setReleaseDate(bookDetails.publishDates);
+		setIsLoading(false);
+		setIsbnQuery('');
 	};
 
-	// useEffect(() => {
-	// 	console.log(bookDetails);
-	// 	console.log(releaseDate);
-	// }, [bookDetails, releaseDate]);
+	const sortByTitle = () => {
+		setYearSortedBooks([])
+		setTitleSortedBooks(
+			books.sort((a, b) => {
+				if (a.title.toLowerCase() < b.title.toLowerCase()) {
+					return -1;
+				}
+				if (a.title.toLowerCase() > b.title.toLowerCase()) {
+					return 1;
+				}
+				return 0;
+			})
+		);
+	};
 
-	// if (error)
-	// 	return (
-	// 		<>
-	// 			<h2>Network error: {error}, please try later.</h2>
-	// 			<Link to='/'>
-	// 				<button className={styles.backBtn}>Back</button>
-	// 			</Link>
-
-	// 		</>
-	// 	);
+	const sortByYear = () => {
+		setYearSortedBooks(
+			books
+				.filter((book) => book.publish_year)
+				.sort((a, b) => {
+					return Number(b.publish_year[0]) - Number(a.publish_year[0]);
+				})
+		);
+	};
 
 	return (
 		<>
@@ -86,6 +121,7 @@ const SearchBook = () => {
 					BOOK TITLE:
 				</label>
 				<input
+					required
 					className={styles.queryInput}
 					type='text'
 					name='query'
@@ -100,24 +136,39 @@ const SearchBook = () => {
 
 			<IsbnForm isbnQuery={isbnQuery} setIsbnQuery={setIsbnQuery} handleIsbnSearch={handleIsbnSearch} />
 
-			<div style={{fontSize: '2rem'}}>
-			<pre>details: {JSON.stringify(bookDetails, '', 3)}</pre>
-			</div>
-
-			{/* <h3>title:{title}</h3>
-			<h3>Author: {author}</h3>
-			<h3>BookCover: {bookCover}</h3> */}
-			<h3>ReleaseDate:{releaseDate}</h3>
-
-
 			{isLoading ? (
-				<h1>Searing...</h1>
+				<h1 className={styles.search}>Searching...</h1>
 			) : (
-				<div className={styles.bookList}>
-					{books.map((book) => (
-						<Card key={book.key} book={book} />
-					))}
-				</div>
+				<>
+					{changeSearch && books.length > 0 ? (
+						<>
+							{books.length > 0 && <button onClick={sortByTitle}>Sort by Title</button>}
+							{books.length > 0 && <button onClick={sortByYear}>Sort by Published Year</button>}
+
+							{yearSortedBooks ? (
+								<div className={styles.bookList}>
+									{yearSortedBooks.map((book) => (
+										<Book key={book.key} book={book} />
+									))}
+								</div>
+							) : (
+								<div className={styles.bookList}>
+									{books.map((book) => (
+										<Book key={book.key} book={book} />
+									))}
+								</div>
+							)}
+							<div className={styles.bookList}>
+								{books.map((book) => (
+									<Book key={book.key} book={book} />
+								))}
+							</div>
+						</>
+					) : (
+						<BookDetail />
+					)}
+					{error && books.length === 0 && <h1>{error}</h1>}
+				</>
 			)}
 		</>
 	);
