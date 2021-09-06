@@ -44,6 +44,7 @@
 
 3.	How would you track down a performance issue in production? Have you ever had to do this?
  - I will check if the servers and web pages are showing slow or slow loading time. I usually go to Google PageSpeed Insights to check the suggestions.
+ ![alt text](https://github.com/dylangit01/Book_Search_App_BMO/blob/main/client/src/images/PageSpeedInsights.png?raw=true)
  - Another reason that caused the problem is with poorly written code, like memory leaks, or synchronization issues. I like to make a plan before writing codes, such as using what state management tool and where to use async/await syntax to handle async issues.
  - CICD is a development practice to detect performance issues in production. I am learning this method currently. 
  - TDD is also important to track down performance issues, I have been learning Jest and Enzyme testing recently.
