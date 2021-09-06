@@ -62,7 +62,7 @@ const SearchBook = () => {
 
 	const handleIsbnSearch = async (e) => {
 		e.preventDefault();
-		setError(null)
+		setError(null);
 		setChangeSearch(false);
 		setIsLoading(true);
 		const res = await fetch('http://localhost:5000/api/book', {
@@ -142,14 +142,14 @@ const SearchBook = () => {
 					{changeSearch && books.length > 0 ? (
 						<>
 							{books.length > 0 && (
-								<button className={styles.titleSortBtn} onClick={sortByTitle}>
-									Sort by Title
-								</button>
-							)}
-							{books.length > 0 && (
-								<button className={styles.yearSortBtn} onClick={sortByYear}>
-									Sort by Published Year
-								</button>
+								<div className={styles.sortBtns}>
+									<button className={styles.titleSortBtn} onClick={sortByTitle}>
+										Sort by Title
+									</button>
+									<button className={styles.yearSortBtn} onClick={sortByYear}>
+										Sort by Published Year
+									</button>
+								</div>
 							)}
 
 							{yearSortedBooks && (

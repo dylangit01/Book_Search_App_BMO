@@ -17,7 +17,7 @@
 	margin-bottom: 1rem;
 }
 
-.queryInput:focus{
+.queryInput:focus {
 	outline: none;
 }
 
@@ -32,7 +32,9 @@
 	transition: background-color 250ms;
 }
 
-.searchBtn:hover {
+.searchBtn:hover,
+.titleSortBtn:hover,
+.yearSortBtn:hover {
 	background-color: rgba(0, 0, 0, 0.85);
 }
 
@@ -44,14 +46,33 @@
 	margin-top: 2rem;
 }
 
-.titleSortBtn {
-	
+.sortBtns {
+	display: grid;
+}
+
+.titleSortBtn,
+.yearSortBtn {
+	background-color: rgba(0, 0, 0, 0.75);
+	color: #fff;
+	padding: 1rem 2rem;
+	border: 1px solid rgba(0, 0, 0, 0.75);
+	border-radius: 5px;
+	font-size: 1.4rem;
+	cursor: pointer;
+	transition: background-color 250ms;
+	margin-top: 2rem;
 }
 
 @media (min-width: 786px) {
 	.form {
 		grid-template-columns: auto 1fr auto;
 		gap: 1rem;
+		align-items: center;
+	}
+
+	.sortBtns {
+		grid-template-columns: auto auto;
+		gap: 8rem;
 		align-items: center;
 	}
 
