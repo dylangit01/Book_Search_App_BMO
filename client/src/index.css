@@ -48,6 +48,7 @@ small {
 .title {
 	font-size: 5rem;
 	text-align: center;
+	cursor: pointer;
 }
 
 a,
@@ -55,4 +56,9 @@ a:visited,
 a:hover,
 a:active {
 	color: inherit;
+}
+
+.reload {
+	width: 20px;
+	margin-bottom: 1.5rem;
 }
