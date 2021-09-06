@@ -6,7 +6,7 @@ function App() {
 	return (
 		<Router>
 			<div className='container'>
-				<h1 className='title'>Book Search</h1>
+				<h1 className='title'>Online Book Search</h1>
 				<Switch>
 					<Route exact path='/'>
 						<SearchBook />
