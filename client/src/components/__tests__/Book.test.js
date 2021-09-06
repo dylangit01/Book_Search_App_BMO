@@ -1,10 +1,12 @@
-import { render, screen, cleanup, fireEvent } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import Book from '../Book/Book';
 
+afterEach(cleanup);
+
 describe('Book component', () => {
-	it('should not render when no content', async () => {
-		const book = { title: 'test book', author: ['book author'], publish_date: ['2021'], cover_i: 123456};
+	it('should display book search result', async () => {
+		const book = { title: 'test book', author: ['book author'], publish_date: ['2021']};
 		render(<Book book={book} />);
 		const bookTitle = screen.getByTestId('book-title');
 		const bookAuthor = screen.getByTestId('book-author');
@@ -16,6 +18,5 @@ describe('Book component', () => {
 		expect(bookAuthor).toHaveTextContent('Author:');
 		expect(bookPublishDate).toBeInTheDocument();
 		expect(bookPublishDate).toHaveTextContent('2021');
-
 	});
 });
