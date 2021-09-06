@@ -70,7 +70,7 @@ const SearchBook = () => {
 		setChangeSearch(false);
 		setIsLoading(true);
 		// const localServer = 'http://localhost:5000/api/book'
-		const herokuServerURL = 'https://book-seach-master.herokuapp.com/';
+		const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/book';
 		const res = await fetch(herokuServerURL, {
 			method: 'POST',
 			headers: {
