@@ -114,7 +114,7 @@ const SearchBook = () => {
 	};
 
 	return (
-		<>
+		<div data-testid="searchBook-1">
 			<form className={styles.form} onSubmit={fetchBooks}>
 				<label htmlFor='query' className={styles.label}>
 					BOOK TITLE:
@@ -162,7 +162,7 @@ const SearchBook = () => {
 					{error && books.length === 0 && <h1 className={styles.errorMsg}>{error}</h1>}
 				</>
 			)}
-		</>
+		</div>
 	);
 };
 
