@@ -9,7 +9,7 @@
 
 # Technical Questions
 1.	How long did you spend on the coding assignment? 
-* I have spent 3 days on this coding assignment.
+* I have spent 2 and half days on this coding assignment.
 	* a.	What would you add to your solution if you had more time?
 
 		- [ ] Add a "Search by Author" filter option
