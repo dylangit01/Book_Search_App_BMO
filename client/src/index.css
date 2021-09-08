@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+
 html {
 	font-size: 10px;
 	background: url('./images/library_wallpaper.jpeg') no-repeat center center fixed; 
@@ -29,6 +32,7 @@ body {
 	padding: 0;
 	background-color: rgb(244, 244, 244);
 	color: #333;
+	font-family: 'Playfair Display', serif;
 }
 
 p {
@@ -49,6 +53,7 @@ small {
 	font-size: 5rem;
 	text-align: center;
 	cursor: pointer;
+	font-family: 'Roboto', sans-serif;
 }
 
 a,
@@ -61,4 +66,5 @@ a:active {
 .reload {
 	width: 15px;
 	margin-bottom: 1.5rem;
+	margin-left: 5px;
 }
