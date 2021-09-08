@@ -84,6 +84,7 @@ const SearchBook = () => {
 			const err = new Error();
 			err.message = 'No result, please try again';
 			setError(err.message);
+			setBooks([])
 			setIsLoading(false);
 			setIsbnQuery('');
 			return;
