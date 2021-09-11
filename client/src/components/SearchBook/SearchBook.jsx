@@ -25,7 +25,7 @@ const SearchBook = () => {
 	// todo: create backend API and redux action for fetchBooks function
 	const fetchBooks = async (e) => {
 		e.preventDefault();
-		
+
 		setTitleSortedBooks([]);
 		setYearSortedBooks([]);
 		setBooks([]);
@@ -34,66 +34,65 @@ const SearchBook = () => {
 		try {
 			const res = await fetch(`${URL}${query}`);
 			if (res.status === 500) {
-				const err = new Error();
-				err.message =
-					"Sorry, Internal Server Error! There seems to be a problem with what you were just looking at. We've noted the error 2021-09-05/132912964475 and will look into it as soon as possible.";
-				setError(err.message);
 				setIsLoading(false);
 				setQuery('');
-				return;
+				throw new Error(
+					"Sorry, Internal Server Error! There seems to be a problem with what you were just looking at. We've noted the error and will look into it as soon as possible."
+				);
+			}
+			if (res.status === 404) {
+				setIsLoading(false);
+				setQuery('');
+				throw new Error('Please make sure search URL is correct');
 			}
 			const data = await res.json();
-			
 			if (data.docs.length === 0) {
-				const err = new Error();
-				err.message = 'No result, please try again';
-				setError(err.message);
 				setIsLoading(false);
 				setQuery('');
-				return;
+				throw new Error('No result, please try again');
 			}
 
 			setBooks(data.docs);
 			setIsLoading(false);
 			setQuery('');
 		} catch (e) {
-			setIsLoading(true);
 			setError(e.message);
-			setIsLoading(false);
 		}
 	};
 
 	// Build Backend API for Isbn Search because of CORS error
-	// Create Redux to handle async issue when fetching response from backend 
+	// Create Redux to handle async issue when fetching response from backend
 	const handleIsbnSearch = async (e) => {
 		e.preventDefault();
 		setError(null);
 		setChangeSearch(false);
 		setIsLoading(true);
-		// const localServer = 'http://localhost:5000/api/book'
+		// const localServer = 'http://localhost:5000/api/book';
 		const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/book';
-		const res = await fetch(herokuServerURL, {
-			method: 'POST',
-			headers: {
-				'Content-type': 'application/json',
-			},
-			body: JSON.stringify({ isbnQuery }),
-		});
-		const { records } = await res.json();
+		try {
+			const res = await fetch(herokuServerURL, {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify({ isbnQuery }),
+			});
+			const { records } = await res.json();
 
-		if (records === undefined) {
-			const err = new Error();
-			err.message = 'No result, please try again';
-			setError(err.message);
-			setBooks([])
+			if (records === undefined) {
+				setIsLoading(false);
+				setQuery('');
+				setIsbnQuery('');
+				setBooks([]);
+				throw new Error('No result, please try again');
+			}
+
+			dispatch(getBookDetails(records));
 			setIsLoading(false);
 			setIsbnQuery('');
-			return;
+		} catch (error) {
+			setError(error.message)
 		}
-
-		dispatch(getBookDetails(records));
-		setIsLoading(false);
-		setIsbnQuery('');
 	};
 
 	const sortByTitle = () => {
