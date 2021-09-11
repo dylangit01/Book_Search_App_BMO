@@ -25,6 +25,7 @@ const SearchBook = () => {
 	// todo: create backend API and redux action for fetchBooks function
 	const fetchBooks = async (e) => {
 		e.preventDefault();
+		
 		setTitleSortedBooks([]);
 		setYearSortedBooks([]);
 		setBooks([]);
