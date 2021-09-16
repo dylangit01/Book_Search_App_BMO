@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SearchBook.module.css';
 import SearchIsbn from '../SearchIsbn/SearchIsbn';
-import { sortByTitleFun, sortByYearFun, fetchDataFun } from '../Help/helpFuncs';
+import { sortByTitleFun, sortByYearFun } from '../Help/helpFuncs';
 import { useDispatch } from 'react-redux';
 import {
 	getAllBooks,
@@ -30,6 +30,11 @@ const SearchBook = () => {
 	const { books } = useSelector((state) => state.bookState);
 	const { error } = useSelector((state) => state.bookState);
 
+	const clearInput = () => {
+		setIsLoading(false);
+		setQuery('');
+	}
+
 	const fetchBooks = async (e) => {
 		e.preventDefault();
 
@@ -37,30 +42,32 @@ const SearchBook = () => {
 		setChangeSearch(true);
 		setIsLoading(true);
 		try {
-			const res = await fetchDataFun(herokuServerURL, query)
+			const res = await fetch(herokuServerURL, {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify({ query }),
+			});
 
 			if (res.status === 500) {
-				setIsLoading(false);
-				setQuery('');
+				clearInput();
 				throw new Error(
 					"Sorry, Internal Server Error! There seems to be a problem with what you were just looking at. We've noted the error and will look into it as soon as possible."
 				);
 			}
 			if (res.status === 404) {
-				setIsLoading(false);
-				setQuery('');
+				clearInput();
 				throw new Error('Please make sure search URL is correct');
 			}
 			const data = await res.json();
 			if (data.docs.length === 0) {
-				setIsLoading(false);
-				setQuery('');
+				clearInput();
 				throw new Error('No result, please try again');
 			}
 
 			dispatch(getAllBooks(data.docs));
-			setIsLoading(false);
-			setQuery('');
+			clearInput();
 		} catch (e) {
 			dispatch(showErrorMsg(e.message));
 		}
@@ -75,12 +82,17 @@ const SearchBook = () => {
 		setIsLoading(true);
 		const bookDetailsEndPoint = `${herokuServerURL}/bookdetails`;
 		try {
-			const res = await fetchDataFun(bookDetailsEndPoint, isbnQuery)
+			const res = await fetch(bookDetailsEndPoint, {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify({ isbnQuery }),
+			});
 			const { records } = await res.json();
 
 			if (records === undefined) {
-				setIsLoading(false);
-				setQuery('');
+				clearInput();
 				setIsbnQuery('');
 				dispatch(removeBooksResult());
 				throw new Error('No result, please try again');
