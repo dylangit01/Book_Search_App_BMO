@@ -1,11 +1,13 @@
-import { GET_BOOK_DETAILS } from '../actions/bookAction';
+import { GET_ALL_BOOKS, GET_BOOK_DETAILS } from '../actions/bookAction';
 
-const book = (bookDetails = {}, action) => {
+const book = (state = { books: [], bookDetails: {} }, action) => {
 	switch (action.type) {
+		case GET_ALL_BOOKS:
+			return { ...state, books: action.payload };
 		case GET_BOOK_DETAILS:
-			return { ...Object.values(action.payload)[0] };
+			return { ...state, bookDetails: Object.values(action.payload)[0] };
 		default:
-			return bookDetails;
+			return state;
 	}
 };
 

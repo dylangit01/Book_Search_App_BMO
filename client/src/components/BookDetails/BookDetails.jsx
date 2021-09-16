@@ -10,8 +10,8 @@ const BookDetails = ({ error }) => {
 	const [pageNums, setPageNums] = useState(0);
 	const [bookInfo, setBookInfo] = useState('');
 
-	// Using redux selector to get data from backend
-	const bookDetails = useSelector((state) => state.bookDetails);
+	// Using redux selector to get bookDetails from store
+	const { bookDetails } = useSelector((state) => state.bookState);
 
 	// Only when bookDetails has been updated from backend, update matched data
 	useEffect(() => {
