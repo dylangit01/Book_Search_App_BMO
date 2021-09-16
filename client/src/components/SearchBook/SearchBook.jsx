@@ -4,14 +4,16 @@ import SearchIsbn from '../SearchIsbn/SearchIsbn';
 import { sortByTitleFun } from '../Help/helpFuncs';
 
 import { useDispatch } from 'react-redux';
-import { getBookDetails } from '../../redux/actions/bookAction';
+import { getAllBooks, getBookDetails } from '../../redux/actions/bookAction';
 import BookDetails from '../BookDetails/BookDetails';
 import SortBook from '../SortBooks/SortBooks';
+
+import { useSelector } from 'react-redux';
 
 const URL = 'https://openlibrary.org/search.json?q=';
 
 const SearchBook = () => {
-	const [books, setBooks] = useState([]);
+	// const [books, setBooks] = useState([]);
 	const [titleSortedBooks, setTitleSortedBooks] = useState([]);
 	const [yearSortedBooks, setYearSortedBooks] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
@@ -22,13 +24,14 @@ const SearchBook = () => {
 
 	const dispatch = useDispatch();
 
-	// todo: create backend API and redux action for fetchBooks function
+	const { books } = useSelector(state => state.bookState)
+
 	const fetchBooks = async (e) => {
 		e.preventDefault();
 
 		setTitleSortedBooks([]);
 		setYearSortedBooks([]);
-		setBooks([]);
+		// setBooks([]);
 		setChangeSearch(true);
 		setIsLoading(true);
 		try {
@@ -52,7 +55,7 @@ const SearchBook = () => {
 				throw new Error('No result, please try again');
 			}
 
-			setBooks(data.docs);
+			dispatch(getAllBooks(data.docs));
 			setIsLoading(false);
 			setQuery('');
 		} catch (e) {
@@ -83,7 +86,7 @@ const SearchBook = () => {
 				setIsLoading(false);
 				setQuery('');
 				setIsbnQuery('');
-				setBooks([]);
+				// setBooks([]);
 				throw new Error('No result, please try again');
 			}
 
