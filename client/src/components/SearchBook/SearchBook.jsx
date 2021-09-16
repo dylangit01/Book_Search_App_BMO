@@ -148,7 +148,7 @@ const SearchBook = () => {
 									</button>
 								</div>
 							)}
-							{/* By using redux to filter the title and year, no need to create separate components for titleSortedBooks and yearSortedBooks, one SortBook component with useSelector solve all filter problems */}
+							{/* By using redux to filter the title and year, no need to create separate components for titleSortedBooks and yearSortedBooks, one SortBook component with useSelector solve all filter conditions */}
 							{<SortBook />}
 						</>
 					) : (
