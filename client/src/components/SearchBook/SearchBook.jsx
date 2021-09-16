@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SearchBook.module.css';
 import SearchIsbn from '../SearchIsbn/SearchIsbn';
-import { sortByTitleFun } from '../Help/helpFuncs';
+import { sortByTitleFun, sortByYearFun } from '../Help/helpFuncs';
 
 import { useDispatch } from 'react-redux';
 import {
@@ -109,14 +109,8 @@ const SearchBook = () => {
 	};
 
 	const sortByYear = () => {
-		setYearSortedBooks(
-			books
-				.filter((book) => book.publish_year)
-				.sort((a, b) => {
-					return Number(b.publish_year[0]) - Number(a.publish_year[0]);
-				})
-		);
-	};
+		setYearSortedBooks(sortByYearFun(books));
+	}
 
 	return (
 		<>

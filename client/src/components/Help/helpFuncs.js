@@ -9,3 +9,11 @@ export const sortByTitleFun = (arr) => {
 		return 0;
 	});
 };
+
+export const sortByYearFun = (arr) => {
+	return arr
+		.filter((item) => item.publish_year)
+		.sort((a, b) => {
+			return Number(b.publish_year[0]) - Number(a.publish_year[0]);
+		});
+};
