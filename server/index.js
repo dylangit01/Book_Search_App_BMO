@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 	res.send('APP API is running');
 });
 
-app.use('/api/book', bookRouter);
+app.use('/api/books', bookRouter);
 
 app.listen(PORT, () => {
 	console.log('App listening on port 5000!');

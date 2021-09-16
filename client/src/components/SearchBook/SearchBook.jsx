@@ -18,7 +18,7 @@ import SortBook from '../SortBooks/SortBooks';
 
 import { useSelector } from 'react-redux';
 
-const URL = 'https://openlibrary.org/search.json?q=';
+const localServer = 'http://localhost:5000/api/books';
 
 const SearchBook = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -38,7 +38,14 @@ const SearchBook = () => {
 		setChangeSearch(true);
 		setIsLoading(true);
 		try {
-			const res = await fetch(`${URL}${query}`);
+			const res = await fetch(localServer, {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify({ query })
+			});
+
 			if (res.status === 500) {
 				setIsLoading(false);
 				setQuery('');
@@ -73,10 +80,10 @@ const SearchBook = () => {
 		dispatch(emptyErrorMsg());
 		setChangeSearch(false);
 		setIsLoading(true);
-		// const localServer = 'http://localhost:5000/api/book';
-		const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/book';
+		const bookDetailsEndPoint = `${localServer}/bookdetails`;
+		// const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/books/bookdetails';
 		try {
-			const res = await fetch(herokuServerURL, {
+			const res = await fetch(bookDetailsEndPoint, {
 				method: 'POST',
 				headers: {
 					'Content-type': 'application/json',
