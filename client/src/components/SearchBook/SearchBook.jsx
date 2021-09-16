@@ -10,6 +10,8 @@ import {
 	removeBooksResult,
 	showErrorMsg,
 	emptyErrorMsg,
+	titleSortedBooks,
+	yearSortedBooks,
 } from '../../redux/actions/bookAction';
 import BookDetails from '../BookDetails/BookDetails';
 import SortBook from '../SortBooks/SortBooks';
@@ -19,8 +21,6 @@ import { useSelector } from 'react-redux';
 const URL = 'https://openlibrary.org/search.json?q=';
 
 const SearchBook = () => {
-	const [titleSortedBooks, setTitleSortedBooks] = useState([]);
-	const [yearSortedBooks, setYearSortedBooks] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [query, setQuery] = useState('');
 	const [isbnQuery, setIsbnQuery] = useState('');
@@ -34,8 +34,6 @@ const SearchBook = () => {
 	const fetchBooks = async (e) => {
 		e.preventDefault();
 
-		setTitleSortedBooks([]);
-		setYearSortedBooks([]);
 		dispatch(removeBooksResult());
 		setChangeSearch(true);
 		setIsLoading(true);
@@ -104,13 +102,12 @@ const SearchBook = () => {
 	};
 
 	const sortByTitle = () => {
-		setYearSortedBooks([]);
-		setTitleSortedBooks(sortByTitleFun(books));
+		dispatch(titleSortedBooks(sortByTitleFun(books)));
 	};
 
 	const sortByYear = () => {
-		setYearSortedBooks(sortByYearFun(books));
-	}
+		dispatch(yearSortedBooks(sortByYearFun(books)));
+	};
 
 	return (
 		<>
@@ -151,10 +148,8 @@ const SearchBook = () => {
 									</button>
 								</div>
 							)}
-
-							{yearSortedBooks && <SortBook sortedBooks={yearSortedBooks} />}
-							{titleSortedBooks && <SortBook sortedBooks={titleSortedBooks} />}
-							<SortBook data-testid='search-result' sortedBooks={books} />
+							{/* By using redux to filter the title and year, no need to create separate components for titleSortedBooks and yearSortedBooks, one SortBook component with useSelector solve all filter problems */}
+							{<SortBook />}
 						</>
 					) : (
 						<BookDetails />

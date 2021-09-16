@@ -1,5 +1,5 @@
 export const sortByTitleFun = (arr) => {
-	arr.sort((a, b) => {
+	return arr.sort((a, b) => {
 		if (a.title.toLowerCase() < b.title.toLowerCase()) {
 			return -1;
 		}

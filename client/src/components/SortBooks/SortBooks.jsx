@@ -1,15 +1,17 @@
-import React from 'react'
+import React from 'react';
 import Book from '../Book/Book';
-import styles from './SortBooks.module.css'
+import styles from './SortBooks.module.css';
+import { useSelector } from 'react-redux';
 
-const SortBook = ({ sortedBooks }) => {
+const SortBook = () => {
+	const { books } = useSelector((state) => state.bookState);
 	return (
 		<div className={styles.bookList}>
-			{sortedBooks.map((book) => (
+			{books.map((book) => (
 				<Book key={book.key} book={book} />
 			))}
 		</div>
 	);
 };
 
-export default SortBook
+export default SortBook;

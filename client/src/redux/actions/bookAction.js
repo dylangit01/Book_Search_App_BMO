@@ -3,6 +3,8 @@ export const GET_ALL_BOOKS = 'GET_ALL_BOOKS';
 export const EMPTY_BOOKS = 'EMPTY_BOOKS';
 export const ERROR = 'ERROR'
 export const EMPTY_ERROR = 'EMPTY_ERROR';
+export const TITLE_SORTED_BOOKS = 'TITLE_SORTED_BOOKS'
+export const YEAR_SORTED_BOOKS = 'YEAR_SORTED_BOOKS';
 
 export const getAllBooks = (data) => async (dispatch) => {
 	try {
@@ -43,3 +45,19 @@ export const emptyErrorMsg = () => async (dispatch) => {
 		console.log(error.message);
 	}
 }
+
+export const titleSortedBooks = (books) => async (dispatch) => {
+	try {
+		dispatch({type: TITLE_SORTED_BOOKS, payload:books})
+	} catch (error) {
+		console.log(error.message);
+	}
+}
+
+export const yearSortedBooks = (books) => async (dispatch) => {
+	try {
+		dispatch({ type: YEAR_SORTED_BOOKS, payload: books });
+	} catch (error) {
+		console.log(error.message);
+	}
+};
