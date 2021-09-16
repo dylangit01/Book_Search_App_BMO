@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SearchBook.module.css';
 import SearchIsbn from '../SearchIsbn/SearchIsbn';
-import { sortByTitleFun, sortByYearFun } from '../Help/helpFuncs';
-
+import { sortByTitleFun, sortByYearFun, fetchDataFun } from '../Help/helpFuncs';
 import { useDispatch } from 'react-redux';
 import {
 	getAllBooks,
@@ -15,10 +14,10 @@ import {
 } from '../../redux/actions/bookAction';
 import BookDetails from '../BookDetails/BookDetails';
 import SortBook from '../SortBooks/SortBooks';
-
 import { useSelector } from 'react-redux';
 
-const localServer = 'http://localhost:5000/api/books';
+// const localServer = 'http://localhost:5000/api/books';
+const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/books';
 
 const SearchBook = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -38,13 +37,7 @@ const SearchBook = () => {
 		setChangeSearch(true);
 		setIsLoading(true);
 		try {
-			const res = await fetch(localServer, {
-				method: 'POST',
-				headers: {
-					'Content-type': 'application/json',
-				},
-				body: JSON.stringify({ query })
-			});
+			const res = await fetchDataFun(herokuServerURL, query)
 
 			if (res.status === 500) {
 				setIsLoading(false);
@@ -80,16 +73,9 @@ const SearchBook = () => {
 		dispatch(emptyErrorMsg());
 		setChangeSearch(false);
 		setIsLoading(true);
-		const bookDetailsEndPoint = `${localServer}/bookdetails`;
-		// const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/books/bookdetails';
+		const bookDetailsEndPoint = `${herokuServerURL}/bookdetails`;
 		try {
-			const res = await fetch(bookDetailsEndPoint, {
-				method: 'POST',
-				headers: {
-					'Content-type': 'application/json',
-				},
-				body: JSON.stringify({ isbnQuery }),
-			});
+			const res = await fetchDataFun(bookDetailsEndPoint, isbnQuery)
 			const { records } = await res.json();
 
 			if (records === undefined) {
