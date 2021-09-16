@@ -4,7 +4,13 @@ import SearchIsbn from '../SearchIsbn/SearchIsbn';
 import { sortByTitleFun } from '../Help/helpFuncs';
 
 import { useDispatch } from 'react-redux';
-import { getAllBooks, getBookDetails, removeBooksResult } from '../../redux/actions/bookAction';
+import {
+	getAllBooks,
+	getBookDetails,
+	removeBooksResult,
+	showErrorMsg,
+	emptyErrorMsg,
+} from '../../redux/actions/bookAction';
 import BookDetails from '../BookDetails/BookDetails';
 import SortBook from '../SortBooks/SortBooks';
 
@@ -16,14 +22,14 @@ const SearchBook = () => {
 	const [titleSortedBooks, setTitleSortedBooks] = useState([]);
 	const [yearSortedBooks, setYearSortedBooks] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
-	const [error, setError] = useState(null);
 	const [query, setQuery] = useState('');
 	const [isbnQuery, setIsbnQuery] = useState('');
 	const [changeSearch, setChangeSearch] = useState(true);
 
 	const dispatch = useDispatch();
 
-	const { books } = useSelector(state => state.bookState);
+	const { books } = useSelector((state) => state.bookState);
+	const { error } = useSelector((state) => state.bookState);
 
 	const fetchBooks = async (e) => {
 		e.preventDefault();
@@ -58,7 +64,7 @@ const SearchBook = () => {
 			setIsLoading(false);
 			setQuery('');
 		} catch (e) {
-			setError(e.message);
+			dispatch(showErrorMsg(e.message));
 		}
 	};
 
@@ -66,7 +72,7 @@ const SearchBook = () => {
 	// Create Redux to handle async issue when fetching response from backend
 	const handleIsbnSearch = async (e) => {
 		e.preventDefault();
-		setError(null);
+		dispatch(emptyErrorMsg());
 		setChangeSearch(false);
 		setIsLoading(true);
 		// const localServer = 'http://localhost:5000/api/book';
@@ -92,8 +98,8 @@ const SearchBook = () => {
 			dispatch(getBookDetails(records));
 			setIsLoading(false);
 			setIsbnQuery('');
-		} catch (error) {
-			setError(error.message)
+		} catch (e) {
+			dispatch(showErrorMsg(e.message));
 		}
 	};
 
@@ -157,7 +163,7 @@ const SearchBook = () => {
 							<SortBook data-testid='search-result' sortedBooks={books} />
 						</>
 					) : (
-						<BookDetails error={error} />
+						<BookDetails />
 					)}
 					{error && books.length === 0 && <h1 className={styles.errorMsg}>{error}</h1>}
 				</>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import styles from './BookDetails.module.css';
 
-const BookDetails = ({ error }) => {
+const BookDetails = () => {
 	const [isbnTitle, setIsbnTitle] = useState('');
 	const [authors, setAuthors] = useState([]);
 	const [releaseDate, setReleaseDate] = useState(null);
@@ -12,6 +12,7 @@ const BookDetails = ({ error }) => {
 
 	// Using redux selector to get bookDetails from store
 	const { bookDetails } = useSelector((state) => state.bookState);
+	const { error } = useSelector((state) => state.bookState);
 
 	// Only when bookDetails has been updated from backend, update matched data
 	useEffect(() => {

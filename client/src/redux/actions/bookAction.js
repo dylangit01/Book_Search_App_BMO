@@ -1,6 +1,8 @@
 export const GET_BOOK_DETAILS = 'GET_BOOK_DETAILS';
 export const GET_ALL_BOOKS = 'GET_ALL_BOOKS';
 export const EMPTY_BOOKS = 'EMPTY_BOOKS';
+export const ERROR = 'ERROR'
+export const EMPTY_ERROR = 'EMPTY_ERROR';
 
 export const getAllBooks = (data) => async (dispatch) => {
 	try {
@@ -21,6 +23,22 @@ export const getBookDetails = (data) => async (dispatch) => {
 export const removeBooksResult = () => async (dispatch) => {
 	try {
 		dispatch({ type: EMPTY_BOOKS, payload: [] });
+	} catch (error) {
+		console.log(error.message);
+	}
+}
+
+export const showErrorMsg = (errorMsg) => async (dispatch) => {
+	try {
+		dispatch({ type: ERROR, payload: errorMsg });
+	} catch (error) {
+		console.log(error.message);
+	}
+}
+
+export const emptyErrorMsg = () => async (dispatch) => {
+	try {
+		dispatch({type: EMPTY_ERROR, payload: null})
 	} catch (error) {
 		console.log(error.message);
 	}
