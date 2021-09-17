@@ -24,7 +24,6 @@ router.post('/bookdetails', async (req, res) => {
 	}
 })
 
-
 // Fetch books by author:
 router.post('/authors', async (req, res) => {
 	const URL = 'http://openlibrary.org/search/authors.json?q=';

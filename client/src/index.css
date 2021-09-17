@@ -55,7 +55,7 @@ small {
 	text-align: center;
 	cursor: pointer;
 	font-family: 'Roboto', sans-serif;
-	/* margin-top: 0; */
+	margin-top: 1rem;
 }
 
 a,
@@ -71,8 +71,3 @@ a:active {
 	margin-left: 5px;
 }
 
-@media (min-width: 768px) {
-	.title {
-		margin-top: 1rem;
-	}
-}

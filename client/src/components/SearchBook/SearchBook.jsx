@@ -27,7 +27,7 @@ const SearchBook = ({ handleScrollUp }) => {
 	const [query, setQuery] = useState('');
 	const [isbnQuery, setIsbnQuery] = useState('');
 	const [authorQuery, setAuthorQuery] = useState('');
-	const [changeSearch, setChangeSearch] = useState(true);
+	const [searchType, setSearchType] = useState(null);
 	const [showLoader, setShowLoader] = useState(false);
 	const [showGoTop, setShowGoTop] = useState(false);
 	const [bookNum, setBookNum] = useState(5);
@@ -47,7 +47,7 @@ const SearchBook = ({ handleScrollUp }) => {
 
 		dispatch(removeBooksResult());
 		setBookNum(5);
-		setChangeSearch(true);
+		setSearchType('title');
 		setIsLoading(true);
 		try {
 			const res = await fetch(localServer, {
@@ -81,13 +81,13 @@ const SearchBook = ({ handleScrollUp }) => {
 		}
 	};
 
-	// Fetch books by searching author name:
+	// Get books by searching author's name:
 	const fetchBooksByAuthor = async (e) => {
 		e.preventDefault();
 
 		dispatch(removeBooksResult());
 		setBookNum(5);
-		setChangeSearch(true);
+		setSearchType('author');
 		setIsLoading(true);
 		const bookAuthorEndPoint = `${localServer}/authors`;
 		try {
@@ -120,8 +120,9 @@ const SearchBook = ({ handleScrollUp }) => {
 	// Create Redux to handle async issue when fetching response from backend
 	const fetchBookDetails = async (e) => {
 		e.preventDefault();
+
 		dispatch(emptyErrorMsg());
-		setChangeSearch(false);
+		setSearchType('details');
 		setIsLoading(true);
 		const bookDetailsEndPoint = `${localServer}/bookdetails`;
 		try {
@@ -133,7 +134,6 @@ const SearchBook = ({ handleScrollUp }) => {
 				body: JSON.stringify({ isbnQuery }),
 			});
 			const { records } = await res.json();
-
 			if (records === undefined) {
 				clearInput();
 				dispatch(removeBooksResult());
@@ -193,15 +193,6 @@ const SearchBook = ({ handleScrollUp }) => {
 			/>
 
 			<SearchForm
-				handleSubmit={fetchBooksByAuthor}
-				name='authorQuery'
-				text='BOOK AUTHOR:'
-				placeholder='i.e. J. K. Rowling'
-				value={authorQuery}
-				handleChange={(e) => setAuthorQuery(e.target.value)}
-			/>
-
-			<SearchForm
 				formTestId='isbn-form'
 				labelTestId='isbn-search-label'
 				inputTestId='isbn-search-input'
@@ -214,11 +205,20 @@ const SearchBook = ({ handleScrollUp }) => {
 				handleChange={(e) => setIsbnQuery(e.target.value)}
 			/>
 
+			<SearchForm
+				handleSubmit={fetchBooksByAuthor}
+				name='authorQuery'
+				text='BOOK AUTHOR:'
+				placeholder='i.e. J. K. Rowling'
+				value={authorQuery}
+				handleChange={(e) => setAuthorQuery(e.target.value)}
+			/>
+
 			{isLoading ? (
 				<div data-testid='search-loading' className={styles.spinner} />
 			) : (
 				<>
-					{changeSearch && books.length > 0 ? (
+					{searchType === 'title' && books.length > 0 && (
 						<>
 							{books.length > 0 && (
 								<div className={styles.sortBtns}>
@@ -233,9 +233,9 @@ const SearchBook = ({ handleScrollUp }) => {
 							{/* By using redux to filter the title and year, no need to create separate components for titleSortedBooks and yearSortedBooks, one SortBook component with useSelector solve all filter conditions */}
 							<SortBook data-testid='search-result' bookNum={bookNum} />
 						</>
-					) : (
-						<BookDetails />
 					)}
+					{searchType === 'author' && books.length > 0 && <SortBook bookNum={bookNum} />}
+					{searchType === 'details' && <BookDetails />}
 					{error && books.length === 0 && <h1 className={styles.errorMsg}>{error}</h1>}
 				</>
 			)}
