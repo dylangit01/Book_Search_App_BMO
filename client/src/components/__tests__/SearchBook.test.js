@@ -35,7 +35,7 @@ describe('SearchBook component', () => {
 		expect(searchBookEl).toHaveTextContent('BOOK TITLE');
 	});
 
-	it('should render input', () => {
+	it('should render search book input', () => {
 		renderWithRedux(<SearchBook />);
 		const inputEl = screen.getByTestId('search-input');
 		expect(inputEl).toBeTruthy();
@@ -45,5 +45,23 @@ describe('SearchBook component', () => {
 		renderWithRedux(<SearchBook />);
 		const loadingEl = screen.queryByTestId('search-loading');
 		expect(loadingEl).toBeFalsy();
+	});
+
+	it('should render ISBN search form', () => {
+		renderWithRedux(<SearchBook />);
+		const isbnForm = screen.getByTestId('isbn-form');
+		expect(isbnForm).toBeInTheDocument();
+	});
+
+	it('should display ISBN search label', () => {
+		renderWithRedux(<SearchBook />);
+		const searchBookEl = screen.getByTestId('isbn-search-label');
+		expect(searchBookEl).toHaveTextContent('BOOK ISBN');
+	});
+
+	it('should render ISBN search input', () => {
+		renderWithRedux(<SearchBook />);
+		const inputEl = screen.getByTestId('isbn-search-input');
+		expect(inputEl).toBeTruthy();
 	});
 });

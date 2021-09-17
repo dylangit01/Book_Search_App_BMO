@@ -15,8 +15,8 @@ import {
 import BookDetails from '../BookDetails/BookDetails';
 import SortBook from '../SortBooks/SortBooks';
 
-// const localServer = 'http://localhost:5000/api/books';
-const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/books';
+const localServer = 'http://localhost:5000/api/books';
+// const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/books';
 
 const SearchBook = () => {
 	const [isLoading, setIsLoading] = useState(false);
@@ -41,7 +41,7 @@ const SearchBook = () => {
 		setChangeSearch(true);
 		setIsLoading(true);
 		try {
-			const res = await fetch(herokuServerURL, {
+			const res = await fetch(localServer, {
 				method: 'POST',
 				headers: {
 					'Content-type': 'application/json',
@@ -79,7 +79,7 @@ const SearchBook = () => {
 		dispatch(emptyErrorMsg());
 		setChangeSearch(false);
 		setIsLoading(true);
-		const bookDetailsEndPoint = `${herokuServerURL}/bookdetails`;
+		const bookDetailsEndPoint = `${localServer}/bookdetails`;
 		try {
 			const res = await fetch(bookDetailsEndPoint, {
 				method: 'POST',

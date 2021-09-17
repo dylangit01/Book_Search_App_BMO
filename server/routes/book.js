@@ -14,10 +14,12 @@ router.post('/bookdetails', async (req, res) => {
 
 // Fetch all books from library API
 router.post('/', async (req, res) => {
+	const limit = 5;
+	let page = 1;
 	const URL = 'https://openlibrary.org/search.json?q=';
 	try {
 		const { query } = req.body;
-		const { data } = await axios.get(`${URL}${query}`);
+		const { data } = await axios.get(`${URL}${query}&page=${page}&limit=${limit}`);
 		res.json(data)
 	} catch (error) {
 		res.status(500).json({msg: 'something went wrong'})
