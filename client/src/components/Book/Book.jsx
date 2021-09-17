@@ -1,11 +1,12 @@
 import React from 'react';
 import styles from './Book.module.css'
 
-const Book = ({ book }) => {
+const Book = ({ book, number }) => {
 
 	return (
 		<>
 			<div className={styles.card}>
+			<div className={styles.bookNumber}>{number}</div>
 				<div className={styles.cardContent}>
 					<div>
 						<h3 data-testid='book-title' className={styles.cardTitle}>

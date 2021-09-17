@@ -4,6 +4,7 @@
 	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.75);
 	margin-bottom: 2rem;
 	background-color: #fff;
+	position: relative;
 }
 
 .pubDateLabel {
@@ -38,7 +39,22 @@
 .bookImg {
 	height: 200px;
 	width: auto;
-	
+}
+
+.bookNumber {
+	position: absolute;
+	top: -15px;
+	left:-15px;
+	font-size: 20px;
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	background: #333;
+	color:#fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Roboto', sans-serif;
 }
 
 @media (min-width: 786px) {

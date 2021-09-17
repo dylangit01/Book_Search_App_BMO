@@ -7,8 +7,8 @@ const SortBook = () => {
 	const { books } = useSelector((state) => state.bookState);
 	return (
 		<div className={styles.bookList}>
-			{books.map((book) => (
-				<Book key={book.key} book={book} />
+			{books.map((book, index) => (
+				<Book key={book.key} book={book} number={index+1} />
 			))}
 		</div>
 	);
