@@ -17,8 +17,8 @@ import BookDetails from '../BookDetails/BookDetails';
 import SortBook from '../SortBooks/SortBooks';
 import goTop from '../../images/go-top.png';
 
-const localServer = 'http://localhost:5000/api/books';
-// const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/books';
+// const localServer = 'http://localhost:5000/api/books';
+const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/books';
 
 const SearchBook = ({ handleScrollUp }) => {
 	const dispatch = useDispatch();
@@ -50,7 +50,7 @@ const SearchBook = ({ handleScrollUp }) => {
 		setSearchType('title');
 		setIsLoading(true);
 		try {
-			const res = await fetch(localServer, {
+			const res = await fetch(herokuServerURL, {
 				method: 'POST',
 				headers: {
 					'Content-type': 'application/json',
@@ -89,7 +89,7 @@ const SearchBook = ({ handleScrollUp }) => {
 		setBookNum(5);
 		setSearchType('author');
 		setIsLoading(true);
-		const bookAuthorEndPoint = `${localServer}/authors`;
+		const bookAuthorEndPoint = `${herokuServerURL}/authors`;
 		try {
 			const res = await fetch(bookAuthorEndPoint, {
 				method: 'POST',
@@ -124,7 +124,7 @@ const SearchBook = ({ handleScrollUp }) => {
 		dispatch(emptyErrorMsg());
 		setSearchType('details');
 		setIsLoading(true);
-		const bookDetailsEndPoint = `${localServer}/bookdetails`;
+		const bookDetailsEndPoint = `${herokuServerURL}/bookdetails`;
 		try {
 			const res = await fetch(bookDetailsEndPoint, {
 				method: 'POST',
