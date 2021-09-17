@@ -19,12 +19,12 @@ const localServer = 'http://localhost:5000/api/books';
 // const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/books';
 
 const SearchBook = () => {
+	const dispatch = useDispatch();
+
 	const [isLoading, setIsLoading] = useState(false);
 	const [query, setQuery] = useState('');
 	const [isbnQuery, setIsbnQuery] = useState('');
 	const [changeSearch, setChangeSearch] = useState(true);
-
-	const dispatch = useDispatch();
 
 	const { books } = useSelector((state) => state.bookState);
 	const { error } = useSelector((state) => state.bookState);
@@ -158,7 +158,7 @@ const SearchBook = () => {
 								</div>
 							)}
 							{/* By using redux to filter the title and year, no need to create separate components for titleSortedBooks and yearSortedBooks, one SortBook component with useSelector solve all filter conditions */}
-							{<SortBook data-testid='search-result' />}
+							<SortBook data-testid='search-result' />
 						</>
 					) : (
 						<BookDetails />

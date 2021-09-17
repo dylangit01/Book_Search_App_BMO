@@ -10,11 +10,6 @@ function App() {
 				<img className='reload' src={reload} alt='reload' />
 			</h1>
 			<SearchBook />
-			<div className='pageLoader'>
-				<div className='circle'></div>
-				<div className='circle'></div>
-				<div className='circle'></div>
-			</div>
 		</div>
 	);
 }
