@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './SearchBook.module.css';
-import SearchIsbn from '../SearchIsbn/SearchIsbn';
+import SearchForm from '../SearchForm/SearchForm';
 import { sortByTitleFun, sortByYearFun } from '../../Help/helpFuncs';
-import { useDispatch, useSelector} from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	getAllBooks,
 	getBookDetails,
@@ -32,7 +32,7 @@ const SearchBook = () => {
 	const clearInput = () => {
 		setIsLoading(false);
 		setQuery('');
-	}
+	};
 
 	const fetchBooks = async (e) => {
 		e.preventDefault();
@@ -74,7 +74,7 @@ const SearchBook = () => {
 
 	// Build Backend API for Isbn Search because of CORS error
 	// Create Redux to handle async issue when fetching response from backend
-	const handleIsbnSearch = async (e) => {
+	const fetchBookDetails = async (e) => {
 		e.preventDefault();
 		dispatch(emptyErrorMsg());
 		setChangeSearch(false);
@@ -115,26 +115,31 @@ const SearchBook = () => {
 
 	return (
 		<>
-			<form data-testid='searchBook' className={styles.form} onSubmit={fetchBooks}>
-				<label data-testid='search-label' htmlFor='query' className={styles.label}>
-					BOOK TITLE:
-				</label>
-				<input
-					data-testid='search-input'
-					required
-					className={styles.queryInput}
-					type='text'
-					name='query'
-					placeholder='i.e. The Great Gatsby'
-					value={query}
-					onChange={(e) => setQuery(e.target.value)}
-				/>
-				<button data-testid='title-button' className={styles.searchBtn} type='submit'>
-					Search
-				</button>
-			</form>
+			<SearchForm
+				formTestId='searchBook'
+				labelTestId='search-label'
+				inputTestId='search-input'
+				btnTestId='title-button'
+				handleSubmit={fetchBooks}
+				name='query'
+				text='BOOK TITLE:'
+				placeholder='i.e. The Great Gatsby'
+				value={query}
+				handleChange={(e) => setQuery(e.target.value)}
+			/>
 
-			<SearchIsbn isbnQuery={isbnQuery} setIsbnQuery={setIsbnQuery} handleIsbnSearch={handleIsbnSearch} />
+			<SearchForm
+				formTestId='isbn-form'
+				labelTestId='isbn-search-label'
+				inputTestId='isbn-search-input'
+				btnTestId='isbn-button'
+				handleSubmit={fetchBookDetails}
+				name='isbnQuery'
+				text='BOOK ISBN:'
+				placeholder='i.e. 9781442249073'
+				value={isbnQuery}
+				handleChange={(e) => setIsbnQuery(e.target.value)}
+			/>
 
 			{isLoading ? (
 				<div data-testid='search-loading' className={styles.spinner} />
