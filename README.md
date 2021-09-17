@@ -20,10 +20,11 @@ BookSearchMaster was built using JavaScript, CSS, HTML, React, Redux, Node, Expr
 ## Wish-List Features
 There were a few features that I was unable to implement in this app due to time limitation. Further work on this app would include:
 
-- [ ] Build pagination for the search results
+- [X] Build pagination for the search results
+- [X] Refactor some other actions using redux
+- [X] Refactor and keep codes DRY, make them more readable
 - [ ] Add a "Search by Author" option
 - [ ] write more tests for app
-- [ ] Refactor some other actions using redux
 
 ## Getting Started & Installation
 
