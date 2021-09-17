@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './SearchBook.module.css';
 import SearchIsbn from '../SearchIsbn/SearchIsbn';
-import { sortByTitleFun, sortByYearFun } from '../Help/helpFuncs';
+import { sortByTitleFun, sortByYearFun } from '../../Help/helpFuncs';
 import { useDispatch } from 'react-redux';
 import {
 	getAllBooks,
