@@ -34,7 +34,7 @@ const Book = ({ book }) => {
 						<img
 							data-testid='book-cover'
 							className={styles.bookImg}
-							src={`https://covers.openlibrary.org/b/id/${book.cover_i}-L.jpg`}
+							src={`https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`}
 							alt='booKImg'
 						/>
 					) : (

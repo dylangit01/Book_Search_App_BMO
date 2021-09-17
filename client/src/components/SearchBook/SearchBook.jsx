@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './SearchBook.module.css';
 import SearchIsbn from '../SearchIsbn/SearchIsbn';
 import { sortByTitleFun, sortByYearFun } from '../../Help/helpFuncs';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector} from 'react-redux';
 import {
 	getAllBooks,
 	getBookDetails,
@@ -14,7 +14,6 @@ import {
 } from '../../redux/actions/bookAction';
 import BookDetails from '../BookDetails/BookDetails';
 import SortBook from '../SortBooks/SortBooks';
-import { useSelector } from 'react-redux';
 
 // const localServer = 'http://localhost:5000/api/books';
 const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/books';

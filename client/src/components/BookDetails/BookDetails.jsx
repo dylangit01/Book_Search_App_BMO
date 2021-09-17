@@ -1,57 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
 import styles from './BookDetails.module.css';
+import { useSelector } from 'react-redux';
 
 const BookDetails = () => {
-	const [isbnTitle, setIsbnTitle] = useState('');
-	const [authors, setAuthors] = useState([]);
-	const [releaseDate, setReleaseDate] = useState(null);
-	const [isbn, setIsbn] = useState('');
-	const [pageNums, setPageNums] = useState(0);
-	const [bookInfo, setBookInfo] = useState('');
-
 	// Using redux selector to get bookDetails from store
 	const { bookDetails } = useSelector((state) => state.bookState);
 	const { error } = useSelector((state) => state.bookState);
 
-	// Only when bookDetails has been updated from backend, update matched data
-	useEffect(() => {
-		if (bookDetails) {
-			setIsbnTitle(bookDetails.data?.title);
-			setAuthors(bookDetails.data?.authors);
-			setReleaseDate(bookDetails.publishDates);
-			setIsbn(bookDetails.isbns);
-			setPageNums(bookDetails.details?.details?.number_of_pages);
-			setBookInfo(bookDetails.details?.info_url);
-		}
-	}, [bookDetails]);
+	const imgSrc = `https://covers.openlibrary.org/b/isbn/${bookDetails?.isbns}-M.jpg`;
 
 	return (
 		<>
 			{!error && Object.keys(bookDetails).length > 0 && (
-				<div data-testid='book-details' className={styles.card}>
+				<>
 					<h1>Book Details:</h1>
-					<div className={styles.cardContent}>
-						<h3 className={styles.cardTitle}>Title: {isbnTitle}</h3>
-						<h3 className={styles.cardTitle}>ISBN: {isbn && isbn[0]}</h3>
-						<h3 className={styles.releaseDate}>Publish Date: {releaseDate}</h3>
-						<h3 className={styles.cardAuthor}>
-							Author:
-							{authors &&
-								authors.map((author, i) => (
-									<div key={i}>
-										<ul>
-											<li>{author.name}</li>
-										</ul>
-									</div>
-								))}
-						</h3>
-						<h3 className={styles.cardAuthor}>Number of Pages: {pageNums}</h3>
-						<a target='_blank' rel='noreferrer' href={bookInfo}>
-							Book Info Link
-						</a>
+					<div data-testid='book-details' className={styles.card}>
+						<img src={imgSrc} alt='bookDetailImg' />
+						<div className={styles.cardContent}>
+							<h3 className={styles.bookTitle}>Title: {bookDetails?.data?.title}</h3>
+							<h3 className={styles.bookIsbn}>ISBN: {bookDetails?.isbns}</h3>
+							<h3 className={styles.releaseDate}>Publish Date: {bookDetails?.publishDates}</h3>
+							<h3 className={styles.bookAuthor}>
+								Author:
+								{bookDetails.data?.authors &&
+									bookDetails.data?.authors.map((author, i) => (
+										<div key={i}>
+											<ul>
+												<li>{author.name}</li>
+											</ul>
+										</div>
+									))}
+							</h3>
+							<h3 className={styles.bookPages}>
+								Number of Pages:&nbsp;
+								{bookDetails.details?.details?.number_of_pages
+									? bookDetails.details?.details?.number_of_pages
+									: 'unknown'}
+							</h3>
+							<a className={styles.bookLink} target='_blank' rel='noreferrer' href={bookDetails.details?.info_url}>
+								Book Info Link
+							</a>
+						</div>
 					</div>
-				</div>
+				</>
 			)}
 		</>
 	);
