@@ -23,7 +23,7 @@ There were a few features that I was unable to implement in this app due to time
 - [X] Build pagination for the search results
 - [X] Refactor some other actions using redux
 - [X] Refactor and keep codes DRY, make them more readable
-- [ ] Add a "Search by Author" option
+- [X] Add a "Search by Author" option
 - [ ] write more tests for app
 
 ## Getting Started & Installation
