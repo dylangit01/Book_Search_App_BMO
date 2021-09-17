@@ -159,12 +159,12 @@ const SearchBook = ({ handleScrollUp }) => {
 	useEffect(() => {
 		const handleScroll = () => {
 			const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-			if (scrollTop + clientHeight >= scrollHeight) {
+			if (scrollTop + clientHeight >= scrollHeight - 5) {
 				setShowLoader(true);
 				setTimeout(() => {
 					setBookNum((preValue) => preValue + 5);
 					setShowLoader(false);
-				}, 1000);
+				}, 500);
 			}
 			if (scrollTop >= clientHeight) {
 				setShowGoTop(true);
