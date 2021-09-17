@@ -28,9 +28,7 @@ const SearchBook = ({ handleScrollUp }) => {
 	const [isbnQuery, setIsbnQuery] = useState('');
 	const [authorQuery, setAuthorQuery] = useState('');
 	const [searchType, setSearchType] = useState(null);
-	const [showLoader, setShowLoader] = useState(false);
 	const [showGoTop, setShowGoTop] = useState(false);
-	const [bookNum, setBookNum] = useState(5);
 
 	const { books } = useSelector((state) => state.bookState);
 	const { error } = useSelector((state) => state.bookState);
@@ -46,7 +44,6 @@ const SearchBook = ({ handleScrollUp }) => {
 		e.preventDefault();
 
 		dispatch(removeBooksResult());
-		setBookNum(5);
 		setSearchType('title');
 		setIsLoading(true);
 		try {
@@ -86,7 +83,6 @@ const SearchBook = ({ handleScrollUp }) => {
 		e.preventDefault();
 
 		dispatch(removeBooksResult());
-		setBookNum(5);
 		setSearchType('author');
 		setIsLoading(true);
 		const bookAuthorEndPoint = `${herokuServerURL}/authors`;
@@ -158,14 +154,7 @@ const SearchBook = ({ handleScrollUp }) => {
 	// Create load more event
 	useEffect(() => {
 		const handleScroll = () => {
-			const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-			if (scrollTop + clientHeight >= scrollHeight - 5) {
-				setShowLoader(true);
-				setTimeout(() => {
-					setBookNum((preValue) => preValue + 5);
-					setShowLoader(false);
-				}, 500);
-			}
+			const { scrollTop, clientHeight } = document.documentElement;
 			if (scrollTop >= clientHeight) {
 				setShowGoTop(true);
 			} else {
@@ -231,19 +220,14 @@ const SearchBook = ({ handleScrollUp }) => {
 								</div>
 							)}
 							{/* By using redux to filter the title and year, no need to create separate components for titleSortedBooks and yearSortedBooks, one SortBook component with useSelector solve all filter conditions */}
-							<SortBook data-testid='search-result' bookNum={bookNum} />
+							<SortBook data-testid='search-result' />
 						</>
 					)}
-					{searchType === 'author' && books.length > 0 && <SortBook bookNum={bookNum} />}
+					{searchType === 'author' && books.length > 0 && <SortBook />}
 					{searchType === 'details' && <BookDetails />}
 					{error && books.length === 0 && <h1 className={styles.errorMsg}>{error}</h1>}
 				</>
 			)}
-			<div className={`${styles.pageLoader} ${showLoader && styles.show}`}>
-				<div className={styles.circle}></div>
-				<div className={styles.circle}></div>
-				<div className={styles.circle}></div>
-			</div>
 			<img className={`${styles.goTop} ${showGoTop && styles.show}`} src={goTop} alt='goTop' onClick={handleScrollUp} />
 		</>
 	);
