@@ -3,11 +3,11 @@
 
 html {
 	font-size: 10px;
-	background: url('./images/library_wallpaper.jpeg') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+	background: url('./images/library_wallpaper.jpeg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
 	height: auto;
 }
 
@@ -20,7 +20,7 @@ html::before {
 	top: 0;
 	bottom: 0;
 	background: rgb(0, 0, 0, 0.6);
-  z-index: -1;
+	z-index: -1;
 }
 
 * {
@@ -55,6 +55,7 @@ small {
 	text-align: center;
 	cursor: pointer;
 	font-family: 'Roboto', sans-serif;
+	/* margin-top: 0; */
 }
 
 a,
@@ -68,4 +69,10 @@ a:active {
 	width: 15px;
 	margin-bottom: 1.5rem;
 	margin-left: 5px;
+}
+
+@media (min-width: 768px) {
+	.title {
+		margin-top: 1rem;
+	}
 }

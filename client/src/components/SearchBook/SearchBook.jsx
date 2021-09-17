@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './SearchBook.module.css';
 import SearchForm from '../SearchForm/SearchForm';
 import { sortByTitleFun, sortByYearFun } from '../../Help/helpFuncs';
@@ -14,17 +14,21 @@ import {
 } from '../../redux/actions/bookAction';
 import BookDetails from '../BookDetails/BookDetails';
 import SortBook from '../SortBooks/SortBooks';
+import goTop from '../../images/go-top.png'
 
 const localServer = 'http://localhost:5000/api/books';
 // const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/books';
 
-const SearchBook = () => {
+const SearchBook = ({ handleScrollUp }) => {
 	const dispatch = useDispatch();
 
 	const [isLoading, setIsLoading] = useState(false);
 	const [query, setQuery] = useState('');
 	const [isbnQuery, setIsbnQuery] = useState('');
 	const [changeSearch, setChangeSearch] = useState(true);
+	const [showLoader, setShowLoader] = useState(false);
+	const [showGoTop, setShowGoTop] = useState(false);
+	const [bookNum, setBookNum] = useState(5);
 
 	const { books } = useSelector((state) => state.bookState);
 	const { error } = useSelector((state) => state.bookState);
@@ -113,6 +117,28 @@ const SearchBook = () => {
 		dispatch(yearSortedBooks(sortByYearFun(books)));
 	};
 
+	// Create scroll event
+	useEffect(() => {
+		const handleScroll = () => {
+			const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+			if (scrollTop + clientHeight >= scrollHeight) {
+				setShowLoader(true);
+				setTimeout(() => {
+					setBookNum((preValue) => preValue + 5);
+					setShowLoader(false);
+				}, 1000);
+			}
+			if (scrollTop >= clientHeight) {
+				setShowGoTop(true);
+			} else {
+				setShowGoTop(false);
+			}
+		};
+
+		window.addEventListener('scroll', handleScroll);
+		return () => window.removeEventListener('scroll', handleScroll);
+	}, []);
+
 	return (
 		<>
 			<SearchForm
@@ -158,7 +184,7 @@ const SearchBook = () => {
 								</div>
 							)}
 							{/* By using redux to filter the title and year, no need to create separate components for titleSortedBooks and yearSortedBooks, one SortBook component with useSelector solve all filter conditions */}
-							<SortBook data-testid='search-result' />
+							<SortBook data-testid='search-result' bookNum={bookNum} />
 						</>
 					) : (
 						<BookDetails />
@@ -166,6 +192,12 @@ const SearchBook = () => {
 					{error && books.length === 0 && <h1 className={styles.errorMsg}>{error}</h1>}
 				</>
 			)}
+			<div className={`${styles.pageLoader} ${showLoader && styles.show}`}>
+				<div className={styles.circle}></div>
+				<div className={styles.circle}></div>
+				<div className={styles.circle}></div>
+			</div>
+			<img className={`${styles.goTop} ${showGoTop && styles.show}`} src={goTop} alt='goTop' onClick={handleScrollUp} />
 		</>
 	);
 };
