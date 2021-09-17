@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
 	getAllBooks,
 	getBookDetails,
+	getBooksByAuthor,
 	removeBooksResult,
 	showErrorMsg,
 	emptyErrorMsg,
@@ -14,7 +15,7 @@ import {
 } from '../../redux/actions/bookAction';
 import BookDetails from '../BookDetails/BookDetails';
 import SortBook from '../SortBooks/SortBooks';
-import goTop from '../../images/go-top.png'
+import goTop from '../../images/go-top.png';
 
 const localServer = 'http://localhost:5000/api/books';
 // const herokuServerURL = 'https://book-seach-master.herokuapp.com/api/books';
@@ -25,6 +26,7 @@ const SearchBook = ({ handleScrollUp }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [query, setQuery] = useState('');
 	const [isbnQuery, setIsbnQuery] = useState('');
+	const [authorQuery, setAuthorQuery] = useState('');
 	const [changeSearch, setChangeSearch] = useState(true);
 	const [showLoader, setShowLoader] = useState(false);
 	const [showGoTop, setShowGoTop] = useState(false);
@@ -36,12 +38,15 @@ const SearchBook = ({ handleScrollUp }) => {
 	const clearInput = () => {
 		setIsLoading(false);
 		setQuery('');
+		setIsbnQuery('');
+		setAuthorQuery('');
 	};
 
 	const fetchBooks = async (e) => {
 		e.preventDefault();
 
 		dispatch(removeBooksResult());
+		setBookNum(5);
 		setChangeSearch(true);
 		setIsLoading(true);
 		try {
@@ -76,6 +81,41 @@ const SearchBook = ({ handleScrollUp }) => {
 		}
 	};
 
+	// Fetch books by searching author name:
+	const fetchBooksByAuthor = async (e) => {
+		e.preventDefault();
+
+		dispatch(removeBooksResult());
+		setBookNum(5);
+		setChangeSearch(true);
+		setIsLoading(true);
+		const bookAuthorEndPoint = `${localServer}/authors`;
+		try {
+			const res = await fetch(bookAuthorEndPoint, {
+				method: 'POST',
+				headers: {
+					'Content-type': 'application/json',
+				},
+				body: JSON.stringify({ authorQuery }),
+			});
+
+			if (res.status === 500) {
+				clearInput();
+				throw new Error('No result, please try again');
+			}
+			const data = await res.json();
+			if (data.docs.length === 0) {
+				clearInput();
+				throw new Error('No result, please try again');
+			}
+
+			dispatch(getBooksByAuthor(data.docs));
+			clearInput();
+		} catch (e) {
+			dispatch(showErrorMsg(e.message));
+		}
+	};
+
 	// Build Backend API for Isbn Search because of CORS error
 	// Create Redux to handle async issue when fetching response from backend
 	const fetchBookDetails = async (e) => {
@@ -96,14 +136,12 @@ const SearchBook = ({ handleScrollUp }) => {
 
 			if (records === undefined) {
 				clearInput();
-				setIsbnQuery('');
 				dispatch(removeBooksResult());
 				throw new Error('No result, please try again');
 			}
 
 			dispatch(getBookDetails(records));
-			setIsLoading(false);
-			setIsbnQuery('');
+			clearInput();
 		} catch (e) {
 			dispatch(showErrorMsg(e.message));
 		}
@@ -117,7 +155,7 @@ const SearchBook = ({ handleScrollUp }) => {
 		dispatch(yearSortedBooks(sortByYearFun(books)));
 	};
 
-	// Create scroll event
+	// Create load more event
 	useEffect(() => {
 		const handleScroll = () => {
 			const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
@@ -152,6 +190,15 @@ const SearchBook = ({ handleScrollUp }) => {
 				placeholder='i.e. The Great Gatsby'
 				value={query}
 				handleChange={(e) => setQuery(e.target.value)}
+			/>
+
+			<SearchForm
+				handleSubmit={fetchBooksByAuthor}
+				name='authorQuery'
+				text='BOOK AUTHOR:'
+				placeholder='i.e. J. K. Rowling'
+				value={authorQuery}
+				handleChange={(e) => setAuthorQuery(e.target.value)}
 			/>
 
 			<SearchForm

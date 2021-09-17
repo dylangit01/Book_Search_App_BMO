@@ -3,10 +3,10 @@ import styles from './SearchForm.module.css';
 
 const SearchForm = ({
 	handleSubmit,
-	formTestId,
-	labelTestId,
-	inputTestId,
-	btnTestId,
+	formTestId = '',
+	labelTestId = '',
+	inputTestId = '',
+	btnTestId = '',
 	name,
 	text,
 	placeholder,

@@ -6,6 +6,7 @@ import {
 	EMPTY_ERROR,
 	TITLE_SORTED_BOOKS,
 	YEAR_SORTED_BOOKS,
+	GET_BOOK_BY_AUTHOR,
 } from '../actions/bookAction';
 
 const book = (state = { books: [], bookDetails: {}, error: null }, action) => {
@@ -14,6 +15,7 @@ const book = (state = { books: [], bookDetails: {}, error: null }, action) => {
 		case EMPTY_BOOKS:
 		case TITLE_SORTED_BOOKS:
 		case YEAR_SORTED_BOOKS:
+		case GET_BOOK_BY_AUTHOR:
 			return { ...state, books: action.payload };
 		case GET_BOOK_DETAILS:
 			return { ...state, bookDetails: Object.values(action.payload)[0] };

@@ -5,10 +5,19 @@ export const ERROR = 'ERROR'
 export const EMPTY_ERROR = 'EMPTY_ERROR';
 export const TITLE_SORTED_BOOKS = 'TITLE_SORTED_BOOKS'
 export const YEAR_SORTED_BOOKS = 'YEAR_SORTED_BOOKS';
+export const GET_BOOK_BY_AUTHOR = 'GET_BOOK_BY_AUTHOR';
 
 export const getAllBooks = (data) => async (dispatch) => {
 	try {
 		dispatch({type: GET_ALL_BOOKS, payload: data})
+	} catch (error) {
+		console.log(error.message);
+	}
+}
+
+export const getBooksByAuthor = (data) => async (dispatch) => {
+	try {
+		dispatch({type: GET_BOOK_BY_AUTHOR, payload: data})
 	} catch (error) {
 		console.log(error.message);
 	}
