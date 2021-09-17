@@ -56,7 +56,7 @@ const Book = ({ book, number }) => {
 							className={styles.bookImg}
 							src={
 								(book.cover_i && `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`) ||
-								(book.top_work && `http://covers.openlibrary.org/a/olid/${book.key}-M.jpg`)
+								(book.top_work && `https://covers.openlibrary.org/a/olid/${book.key}-M.jpg`)
 							}
 							alt='booKImg'
 						/>
