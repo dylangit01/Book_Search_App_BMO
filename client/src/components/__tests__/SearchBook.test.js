@@ -19,7 +19,6 @@ const renderWithRedux = (
 };
 
 describe('SearchBook component', () => {
-	
 	it('should render with redux', () => {
 		renderWithRedux(<SearchBook />);
 	});
@@ -68,9 +67,15 @@ describe('SearchBook component', () => {
 
 	it('should have correct initial button color', () => {
 		renderWithRedux(<SearchBook />);
-		const searchBtn = screen.getByTestId('title-button');
+		const searchBtn = screen.getByTestId('title-search-button');
 		expect(searchBtn.textContent).toBe('Search');
 		expect(searchBtn).toHaveStyle({ backgroundColor: 'default' });
-	})
+	});
 
+	it('should clear the input field after clicking the search btn', () => {
+		renderWithRedux(<SearchBook />);
+		const searchInput = screen.getByTestId('search-input');
+		const searchBtn = screen.getByTestId('title-search-button');
+		expect(searchBtn).toBeEnabled()
+	});
 });

@@ -172,7 +172,7 @@ const SearchBook = ({ handleScrollUp }) => {
 				formTestId='searchBook'
 				labelTestId='search-label'
 				inputTestId='search-input'
-				btnTestId='title-button'
+				btnTestId='title-search-button'
 				handleSubmit={fetchBooks}
 				name='query'
 				text='BOOK TITLE:'
