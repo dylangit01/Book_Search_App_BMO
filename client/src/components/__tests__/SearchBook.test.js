@@ -19,6 +19,7 @@ const renderWithRedux = (
 };
 
 describe('SearchBook component', () => {
+	
 	it('should render with redux', () => {
 		renderWithRedux(<SearchBook />);
 	});
