@@ -16,9 +16,10 @@ const renderWithRedux = (
 	};
 };
 
-test('renders learn react link', () => {
+test('renders App component', () => {
 	renderWithRedux(<App />);
-	const linkElement = screen.getByText(/Book Search Master/i);
+	// const linkElement = screen.getByText(/Book Search Master/i);
+	const linkElement = screen.getByRole('heading', { name: /Book Search Master/i });
 	expect(linkElement).toBeInTheDocument();
 	expect(linkElement.textContent).toBe('Book Search Master');
 });
