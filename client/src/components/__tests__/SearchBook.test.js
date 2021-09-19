@@ -65,4 +65,12 @@ describe('SearchBook component', () => {
 		const inputEl = screen.getByTestId('isbn-search-input');
 		expect(inputEl).toBeTruthy();
 	});
+
+	it('should have correct initial button color', () => {
+		renderWithRedux(<SearchBook />);
+		const searchBtn = screen.getByTestId('title-button');
+		expect(searchBtn.textContent).toBe('Search');
+		expect(searchBtn).toHaveStyle({ backgroundColor: 'default' });
+	})
+
 });
