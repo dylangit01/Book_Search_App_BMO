@@ -58,13 +58,13 @@ const Book = ({ book, number }) => {
 								(book.cover_i && `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`) ||
 								(book.top_work && `https://covers.openlibrary.org/a/olid/${book.key}-M.jpg`)
 							}
-							alt='booKImg'
+							alt='default booK Img'
 						/>
 					) : (
 						<img
 							className={styles.bookImg}
 							src='https://cdn.pixabay.com/photo/2018/01/03/09/09/book-3057901_640.png'
-							alt='BookImgAlt'
+							alt='Blank Book cover Img'
 						/>
 					)}
 				</div>
