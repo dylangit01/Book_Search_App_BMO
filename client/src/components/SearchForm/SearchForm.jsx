@@ -15,14 +15,15 @@ const SearchForm = ({
 }) => {
 	return (
 		<form data-testid={formTestId} className={styles.formArea} onSubmit={handleSubmit}>
-			<label data-testid={labelTestId} htmlFor={name} className={styles.formLabel}>
+			<label aria-required='true' data-testid={labelTestId} htmlFor={name} className={styles.formLabel}>
 				{text}
 			</label>
 			<input
+				role='search'
 				data-testid={inputTestId}
 				required
 				className={styles.queryInput}
-				type='text'
+				type='search'
 				name={name}
 				placeholder={placeholder}
 				value={value}
