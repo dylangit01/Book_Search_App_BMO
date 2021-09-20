@@ -11,13 +11,13 @@ function App() {
 	};
 
 	return (
-		<div className='container' ref={refScrollUp}>
+		<main className='container' ref={refScrollUp}>
 			<h1 onClick={() => window.location.reload()} className='title'>
 				Book Search Master
 				<img className='reload' src={reload} alt='reload' />
 			</h1>
 			<SearchBook handleScrollUp={handleScrollUp} />
-		</div>
+		</main>
 	);
 }
 
